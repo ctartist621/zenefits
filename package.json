@@ -1,0 +1,23 @@
+{
+  "name": "zenefits",
+  "version": "0.1.0",
+  "description": "An npm module to interact with the Zenefits API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctartist621/zenefits.git"
+  },
+  "keywords": [
+    "zenefits",
+    "hr"
+  ],
+  "author": "David B Mittelman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ctartist621/zenefits/issues"
+  },
+  "homepage": "https://github.com/ctartist621/zenefits#readme"
+}
