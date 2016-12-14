@@ -11,6 +11,8 @@ import needle = require("needle");
 interface ZenefitsInterface {
   companies(cb: any): void;
   company(companyId: string, cb: any): void;
+  people(cb: any): void;
+  person(personId: string, cb: any): void;
 }
 
 export default class Zenefits implements ZenefitsInterface {
@@ -32,6 +34,10 @@ export default class Zenefits implements ZenefitsInterface {
         url = `${this.coreBaseUrl}/${type}/`;
         break;
       }
+      case "people": {
+        url = `${this.coreBaseUrl}/${type}/`;
+        break;
+      }
       default: {
         throw new Error("Request Type not defined");
       }
@@ -46,10 +52,11 @@ export default class Zenefits implements ZenefitsInterface {
         Authorization: `Bearer ${this.bearerKey}`
       }
     };
-    console.log(url);
     needle.get(url, options, function(err: any, resp: any, body: any) {
       let ret = {};
-      if (body.data.data) {
+      if (err) {
+        cb(err);
+      } else if (body.data.data) {
         ret = body.data.data;
       } else if (body.data) {
         ret = body.data;
@@ -73,4 +80,12 @@ export default class Zenefits implements ZenefitsInterface {
   company(companyId: string, cb: any) {
     this.get("companies", companyId, cb);
   }
+
+  people(cb: any) {
+    this.get("people", undefined, cb);
+  }
+  person(personId: string, cb: any) {
+    this.get("people", personId, cb);
+  }
+
 }

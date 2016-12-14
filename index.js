@@ -14,6 +14,10 @@ var Zenefits = (function () {
                 url = this.coreBaseUrl + "/" + type + "/";
                 break;
             }
+            case "people": {
+                url = this.coreBaseUrl + "/" + type + "/";
+                break;
+            }
             default: {
                 throw new Error("Request Type not defined");
             }
@@ -27,10 +31,12 @@ var Zenefits = (function () {
                 Authorization: "Bearer " + this.bearerKey
             }
         };
-        console.log(url);
         needle.get(url, options, function (err, resp, body) {
             var ret = {};
-            if (body.data.data) {
+            if (err) {
+                cb(err);
+            }
+            else if (body.data.data) {
                 ret = body.data.data;
             }
             else if (body.data) {
@@ -52,6 +58,12 @@ var Zenefits = (function () {
     };
     Zenefits.prototype.company = function (companyId, cb) {
         this.get("companies", companyId, cb);
+    };
+    Zenefits.prototype.people = function (cb) {
+        this.get("people", undefined, cb);
+    };
+    Zenefits.prototype.person = function (personId, cb) {
+        this.get("people", personId, cb);
     };
     return Zenefits;
 }());

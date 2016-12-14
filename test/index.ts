@@ -2,6 +2,7 @@
 /// <reference types="chai" />
 /// <reference types="mocha" />
 /// <reference types="lodash" />
+/// <reference path="../index.d.ts" />
 
 import _ = require("lodash");
 import fs = require("fs");
@@ -37,7 +38,7 @@ const hookAfter = function() {
 };
 
 const isCompany = function(c: Company) {
-  expect(c).to.contain.all.keys([
+  expect(c).to.contain.any.keys([
     "name",
     "people",
     "url",
@@ -47,12 +48,42 @@ const isCompany = function(c: Company) {
   ]);
 };
 
+const isPerson = function(p: Person) {
+  expect(p).to.contain.any.keys([
+    "company",
+    "employments",
+    "date_of_birth",
+    "department",
+    "first_name",
+    "last_name",
+    "preferred_name",
+    "status",
+    "location",
+    "manager",
+    "work_phone",
+    "personal_phone",
+    "subordinates",
+    "banks",
+    "work_email",
+    "personal_email",
+    "street1",
+    "street2",
+    "city",
+    "state",
+    "country",
+    "postal_code",
+    "social_security_number",
+    "gender",
+    "title"
+  ]);
+};
+
 describe("Core API", function() {
   describe("#Companies", function() {
     after(hookAfter);
 
     it("should get a list of companies", function(done: any) {
-      client.companies(function(err: any, resp: any) {
+      client.companies(function(err: any, resp: Zenefits.Company[]) {
         expect(err).not.exist;
         expect(resp).to.be.instanceof(Array);
 
@@ -65,10 +96,8 @@ describe("Core API", function() {
     });
 
     it("should get a single company", function(done: any) {
-      client.companies((err: any, companies: Company[]) => {
+      client.companies((err: any, companies: Zenefits.Company[]) => {
         client.company(_.head(companies).id, (err: any, resp: any) => {
-          console.log(err);
-          console.log(resp);
           expect(err).not.exist;
           isCompany(resp);
           done();
@@ -76,4 +105,32 @@ describe("Core API", function() {
       });
     });
   });
+
+  describe("#People", function() {
+    after(hookAfter);
+
+    it("should get a list of people", function(done: any) {
+      client.people(function(err: any, resp: Zenefits.Person[]) {
+        expect(err).not.exist;
+        expect(resp).to.be.instanceof(Array);
+
+        _.forEach(resp, function(r) {
+          isPerson(r);
+        });
+
+        done();
+      });
+    });
+
+    it("should get a single person", function(done: any) {
+      client.people((err: any, companies: Zenefits.Person[]) => {
+        client.person(_.head(companies).id, (err: any, resp: any) => {
+          expect(err).not.exist;
+          isPerson(resp);
+          done();
+        });
+      });
+    });
+  });
+
 });
