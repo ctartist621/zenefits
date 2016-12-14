@@ -50,3 +50,5 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 .tags
+/.DS_Store
+/test/testCreds.json
