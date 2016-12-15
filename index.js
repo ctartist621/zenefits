@@ -18,6 +18,10 @@ var Zenefits = (function () {
                 url = this.coreBaseUrl + "/" + type + "/";
                 break;
             }
+            case "employments": {
+                url = this.coreBaseUrl + "/" + type + "/";
+                break;
+            }
             default: {
                 throw new Error("Request Type not defined");
             }
@@ -64,6 +68,12 @@ var Zenefits = (function () {
     };
     Zenefits.prototype.person = function (personId, cb) {
         this.get("people", personId, cb);
+    };
+    Zenefits.prototype.employments = function (cb) {
+        this.get("employments", undefined, cb);
+    };
+    Zenefits.prototype.employment = function (employmentId, cb) {
+        this.get("employments", employmentId, cb);
     };
     return Zenefits;
 }());

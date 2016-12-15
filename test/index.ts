@@ -18,18 +18,18 @@ if (process.env.CIRCLECI) {
   client.bearerKey = require("./testCreds.json").bearerKey;
 }
 
-// import nock = require("nock");
-// nock.enableNetConnect();
-//
+import nock = require("nock");
+
 // nock.recorder.rec({
 //   dont_print: true,
 //   enable_reqheaders_recording: true,
+//   output_objects: true
 // });
 
-// const nockBack = require("nock").back;
-//
-// nockBack.fixtures = __dirname + "/nockFixtures/fixtures.js";
-// nockBack.setMode("record");
+let nockBack = require("nock").back;
+
+nockBack.fixtures = __dirname + "/nockFixtures";
+nockBack.setMode("record");
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -37,7 +37,7 @@ const hookAfter = function() {
   // fs.appendFileSync(__dirname + "/nockFixtures/fixtures.js", nock.recorder.play());
 };
 
-const isCompany = function(c: Company) {
+const isCompany = function(c: Zenefits.Company) {
   expect(c).to.contain.any.keys([
     "name",
     "people",
@@ -48,7 +48,7 @@ const isCompany = function(c: Company) {
   ]);
 };
 
-const isPerson = function(p: Person) {
+const isPerson = function(p: Zenefits.Person) {
   expect(p).to.contain.any.keys([
     "company",
     "employments",
@@ -78,56 +78,118 @@ const isPerson = function(p: Person) {
   ]);
 };
 
+const isEmployment = function(p: Zenefits.Employment) {
+  expect(p).to.contain.any.keys([
+    "person",
+    "hire_date",
+    "termination_date",
+    "termination_type",
+    "employment_type",
+    "comp_type",
+    "annual_salary",
+    "pay_rate",
+    "working_hours_per_week",
+  ]);
+};
+
 describe("Core API", function() {
+  after(hookAfter);
+
   describe("#Companies", function() {
-    after(hookAfter);
-
     it("should get a list of companies", function(done: any) {
-      client.companies(function(err: any, resp: Zenefits.Company[]) {
-        expect(err).not.exist;
-        expect(resp).to.be.instanceof(Array);
+      nockBack("CompaniesFixture.json", function(nockDone: any) {
+        client.companies(function(err: any, resp: Zenefits.Company[]) {
+          expect(err).not.exist;
+          expect(resp).to.be.instanceof(Array);
 
-        _.forEach(resp, function(r) {
-          isCompany(r);
+          _.forEach(resp, function(r) {
+            isCompany(r);
+          });
+
+          nockDone();
+          done();
         });
-
-        done();
       });
     });
 
     it("should get a single company", function(done: any) {
-      client.companies((err: any, companies: Zenefits.Company[]) => {
-        client.company(_.head(companies).id, (err: any, resp: any) => {
-          expect(err).not.exist;
-          isCompany(resp);
-          done();
+      nockBack("CompaniesFixture.json", function(nockDone1: any) {
+        client.companies((err: any, companies: Zenefits.Company[]) => {
+          nockBack("CompanyFixture.json", function(nockDone2: any) {
+            client.company(_.head(companies).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isCompany(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
         });
       });
     });
   });
 
   describe("#People", function() {
-    after(hookAfter);
-
     it("should get a list of people", function(done: any) {
-      client.people(function(err: any, resp: Zenefits.Person[]) {
-        expect(err).not.exist;
-        expect(resp).to.be.instanceof(Array);
+      nockBack("PeopleFixture.json", function(nockDone: any) {
+        client.people(function(err: any, resp: Zenefits.Person[]) {
+          expect(err).not.exist;
+          expect(resp).to.be.instanceof(Array);
 
-        _.forEach(resp, function(r) {
-          isPerson(r);
+          _.forEach(resp, function(r) {
+            isPerson(r);
+          });
+          nockDone();
+          done();
         });
-
-        done();
       });
     });
 
     it("should get a single person", function(done: any) {
-      client.people((err: any, companies: Zenefits.Person[]) => {
-        client.person(_.head(companies).id, (err: any, resp: any) => {
+      nockBack("PeopleFixture.json", function(nockDone1: any) {
+        client.people((err: any, people: Zenefits.Person[]) => {
+          nockBack("PersonFixture.json", function(nockDone2: any) {
+            client.person(_.head(people).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isPerson(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+
+  describe("#Employments", function() {
+    it("should get a list of employments", function(done: any) {
+      nockBack("EmploymentsFixture.json", function(nockDone: any) {
+        client.employments(function(err: any, resp: Zenefits.Employment[]) {
           expect(err).not.exist;
-          isPerson(resp);
+          expect(resp).to.be.instanceof(Array);
+
+          _.forEach(resp, function(r) {
+            isEmployment(r);
+          });
+          nockDone();
           done();
+        });
+      });
+    });
+
+    it("should get a single employment", function(done: any) {
+      nockBack("EmploymentsFixture.json", function(nockDone1: any) {
+        client.employments((err: any, employments: Zenefits.Employment[]) => {
+          nockBack("EmploymentFixture.json", function(nockDone2: any) {
+            client.employment(_.head(employments).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isEmployment(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
         });
       });
     });

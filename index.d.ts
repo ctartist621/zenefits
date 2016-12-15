@@ -24,7 +24,7 @@ declare namespace Zenefits {
     object: string;
     postal_code: string;
     state: string;
-    status: string;
+    status: Status;
     street1: string;
     street2: string;
     subordinates: Reference;
@@ -33,9 +33,59 @@ declare namespace Zenefits {
     personal_email: string;
     work_phone: string;
     personal_phone: string;
-    gender: string;
+    gender: Gender;
     social_security_number: string;
   }
+
+  enum Status {
+    active,
+    terminated,
+    leave_of_absence,
+    requested,
+    setup,
+    deleted
+  }
+
+  enum Gender {
+    F,
+    M
+  }
+
+  interface Employment {
+    person: Reference;
+    hire_date: string;
+    id: string;
+    termination_date: string;
+    termination_type: TerminationType;
+    employment_type: EmploymentType;
+    comp_type: CompType;
+    annual_salary: number;
+    pay_rate: number;
+    working_hours_per_week: number;
+  }
+
+  enum TerminationType {
+    involuntary,
+    regretted,
+    non_regretted,
+    unclassified,
+    never_started
+  }
+
+  enum EmploymentType {
+    full_time,
+    part_time,
+    temporary,
+    casual,
+    contract,
+    labor_hire
+  }
+
+  enum CompType {
+    salary,
+    hourly
+  }
+
   interface Reference {
     url: string;
     object: string;
