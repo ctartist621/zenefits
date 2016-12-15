@@ -46,6 +46,10 @@ export default class Zenefits implements ZenefitsInterface {
         url = `${this.coreBaseUrl}/${type}/`;
         break;
       }
+      case "banks": {
+        url = `${this.coreBaseUrl}/${type}/`;
+        break;
+      }
       default: {
         throw new Error("Request Type not defined");
       }
@@ -62,12 +66,17 @@ export default class Zenefits implements ZenefitsInterface {
     };
     needle.get(url, options, function(err: any, resp: any, body: any) {
       let ret = {};
-      if (err) {
-        cb(err);
-      } else if (body.data.data) {
+      if (body && body.data.data) {
         ret = body.data.data;
-      } else if (body.data) {
+      } else if (body && body.data) {
         ret = body.data;
+      } else {
+        err = {
+          code: resp && resp.statusCode,
+          message: resp && resp.statusMessage,
+          url: url,
+          err: err || (body && body.error)
+        };
       }
       cb(err, ret);
     });
@@ -92,6 +101,7 @@ export default class Zenefits implements ZenefitsInterface {
   people(cb: any) {
     this.get("people", undefined, cb);
   }
+
   person(personId: string, cb: any) {
     this.get("people", personId, cb);
   }
@@ -99,6 +109,7 @@ export default class Zenefits implements ZenefitsInterface {
   employments(cb: any) {
     this.get("employments", undefined, cb);
   }
+
   employment(employmentId: string, cb: any) {
     this.get("employments", employmentId, cb);
   }
@@ -106,7 +117,16 @@ export default class Zenefits implements ZenefitsInterface {
   companyBankAccounts(cb: any) {
     this.get("company_banks", undefined, cb);
   }
+
   companyBankAccount(accountId: string, cb: any) {
     this.get("company_banks", accountId, cb);
+  }
+
+  employeeBankAccounts(cb: any) {
+    this.get("banks", undefined, cb);
+  }
+
+  employeeBankAccount(accountId: string, cb: any) {
+    this.get("banks", accountId, cb);
   }
 }

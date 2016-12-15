@@ -105,6 +105,17 @@ const isCompanyBankAccount = function(p: Zenefits.Employment) {
   ]);
 };
 
+const isEmployeeBankAccount = function(p: Zenefits.Employment) {
+  expect(p).to.contain.any.keys([
+    "person",
+    "account_type",
+    "account_number",
+    "routing_number",
+    "bank_name",
+    "id",
+  ]);
+};
+
 describe("Core API", function() {
   after(hookAfter);
 
@@ -149,7 +160,7 @@ describe("Core API", function() {
           expect(err).not.exist;
           expect(resp).to.be.instanceof(Array);
 
-          _.forEach(resp, function(r) {
+          _.forEach(resp, function(r: any) {
             isPerson(r);
           });
           nockDone();
@@ -182,7 +193,7 @@ describe("Core API", function() {
           expect(err).not.exist;
           expect(resp).to.be.instanceof(Array);
 
-          _.forEach(resp, function(r) {
+          _.forEach(resp, function(r: any) {
             isEmployment(r);
           });
           nockDone();
@@ -215,7 +226,7 @@ describe("Core API", function() {
           expect(err).not.exist;
           expect(resp).to.be.instanceof(Array);
 
-          _.forEach(resp, function(r) {
+          _.forEach(resp, function(r: any) {
             isCompanyBankAccount(r);
           });
           nockDone();
@@ -231,6 +242,39 @@ describe("Core API", function() {
             client.companyBankAccount(_.head(accounts).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isCompanyBankAccount(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+
+  describe("#Employee Bank Accounts", function() {
+    it("should get a list of employee bank accounts", function(done: any) {
+      nockBack("EmployeeBankAccountsFixture.json", function(nockDone: any) {
+        client.employeeBankAccounts(function(err: any, resp: Zenefits.EmployeeBankAccount[]) {
+          expect(err).not.exist;
+          expect(resp).to.be.instanceof(Array);
+
+          _.forEach(resp, function(r: any) {
+            isEmployeeBankAccount(r);
+          });
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should get a single employee bank account", function(done: any) {
+      nockBack("EmployeeBankAccountsFixture.json", function(nockDone1: any) {
+        client.employeeBankAccounts((err: any, accounts: Zenefits.EmployeeBankAccount[]) => {
+          nockBack("EmployeeBankAccountFixture.json", function(nockDone2: any) {
+            client.employeeBankAccount(_.head(accounts).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isEmployeeBankAccount(resp);
               nockDone1();
               nockDone2();
               done();

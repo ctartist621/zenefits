@@ -105,4 +105,13 @@ declare namespace Zenefits {
     object: string;
     ref_object: string;
   }
+
+  interface EmployeeBankAccount {
+    person: Reference;
+    account_type: AccountType;
+    account_number: number;
+    routing_number: number;
+    bank_name: string;
+    id: string;
+  }
 }
