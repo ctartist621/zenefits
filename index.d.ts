@@ -114,4 +114,12 @@ declare namespace Zenefits {
     bank_name: string;
     id: string;
   }
+
+  interface Department {
+    id: string;
+    name: string;
+    people: Reference,
+    company: Reference,
+    object: string,
+  }
 }

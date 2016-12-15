@@ -94,7 +94,7 @@ const isEmployment = function(p: Zenefits.Employment) {
   ]);
 };
 
-const isCompanyBankAccount = function(p: Zenefits.Employment) {
+const isCompanyBankAccount = function(p: Zenefits.CompanyBankAccount) {
   expect(p).to.contain.any.keys([
     "company",
     "account_type",
@@ -105,7 +105,7 @@ const isCompanyBankAccount = function(p: Zenefits.Employment) {
   ]);
 };
 
-const isEmployeeBankAccount = function(p: Zenefits.Employment) {
+const isEmployeeBankAccount = function(p: Zenefits.EmployeeBankAccount) {
   expect(p).to.contain.any.keys([
     "person",
     "account_type",
@@ -113,6 +113,16 @@ const isEmployeeBankAccount = function(p: Zenefits.Employment) {
     "routing_number",
     "bank_name",
     "id",
+  ]);
+};
+
+const isDepartment = function(p: Zenefits.Department) {
+  expect(p).to.contain.any.keys([
+    "people",
+    "id",
+    "company",
+    "name",
+    "object",
   ]);
 };
 
@@ -275,6 +285,39 @@ describe("Core API", function() {
             client.employeeBankAccount(_.head(accounts).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isEmployeeBankAccount(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+
+  describe("#Departments", function() {
+    it("should get a list of departments", function(done: any) {
+      nockBack("DepartmentsFixture.json", function(nockDone: any) {
+        client.departments(function(err: any, resp: Zenefits.Department[]) {
+          expect(err).not.exist;
+          expect(resp).to.be.instanceof(Array);
+
+          _.forEach(resp, function(r: any) {
+            isDepartment(r);
+          });
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should get a single department", function(done: any) {
+      nockBack("DepartmentsFixture.json", function(nockDone1: any) {
+        client.departments((err: any, departments: Zenefits.Department[]) => {
+          nockBack("DepartmentFixture.json", function(nockDone2: any) {
+            client.department(_.head(departments).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isDepartment(resp);
               nockDone1();
               nockDone2();
               done();

@@ -8,14 +8,7 @@ import _ = require("lodash");
 import async = require("async");
 import needle = require("needle");
 
-interface ZenefitsInterface {
-  companies(cb: any): void;
-  company(companyId: string, cb: any): void;
-  people(cb: any): void;
-  person(personId: string, cb: any): void;
-}
-
-export default class Zenefits implements ZenefitsInterface {
+export default class Zenefits {
   bearerKey: string;
   urlBase: string;
   platformBaseUrl: string;
@@ -29,31 +22,38 @@ export default class Zenefits implements ZenefitsInterface {
 
   get(type: string, id: string, cb?: any) {
     let url = "";
-    switch (type) {
-      case "companies": {
-        url = `${this.coreBaseUrl}/${type}/`;
-        break;
-      }
-      case "people": {
-        url = `${this.coreBaseUrl}/${type}/`;
-        break;
-      }
-      case "employments": {
-        url = `${this.coreBaseUrl}/${type}/`;
-        break;
-      }
-      case "company_banks": {
-        url = `${this.coreBaseUrl}/${type}/`;
-        break;
-      }
-      case "banks": {
-        url = `${this.coreBaseUrl}/${type}/`;
-        break;
-      }
-      default: {
-        throw new Error("Request Type not defined");
-      }
-    }
+    // switch (type) {
+    //   case "companies": {
+    //     url = `${this.coreBaseUrl}/${type}/`;
+    //     break;
+    //   }
+    //   case "people": {
+    //     url = `${this.coreBaseUrl}/${type}/`;
+    //     break;
+    //   }
+    //   case "employments": {
+    //     url = `${this.coreBaseUrl}/${type}/`;
+    //     break;
+    //   }
+    //   case "company_banks": {
+    //     url = `${this.coreBaseUrl}/${type}/`;
+    //     break;
+    //   }
+    //   case "banks": {
+    //     url = `${this.coreBaseUrl}/${type}/`;
+    //     break;
+    //   }
+    //   case "departments": {
+    //     url = `${this.coreBaseUrl}/${type}/`;
+    //     break;
+    //   }
+    //   default: {
+    //     throw new Error("Request Type not defined");
+    //   }
+    // }
+
+    url = `${this.coreBaseUrl}/${type}/`;
+
 
     if (!_.isUndefined(id)) {
       url += id;
@@ -128,5 +128,13 @@ export default class Zenefits implements ZenefitsInterface {
 
   employeeBankAccount(accountId: string, cb: any) {
     this.get("banks", accountId, cb);
+  }
+
+  departments(cb: any) {
+    this.get("departments", undefined, cb);
+  }
+
+  department(deptId: string, cb: any) {
+    this.get("departments", deptId, cb);
   }
 }
