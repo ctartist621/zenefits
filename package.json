@@ -4,7 +4,8 @@
   "description": "An npm module to interact with the Zenefits API",
   "main": "index.js",
   "scripts": {
-    "test": "source ~/.nvm/nvm.sh; nvm use; ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
+    "testLocal": "source ~/.nvm/nvm.sh; nvm use; ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
     "2npm": "publish"
   },
   "repository": {
@@ -29,6 +30,7 @@
     "@types/needle": "^0.7.29",
     "@types/nock": "^8.2.0",
     "chai": "^3.5.0",
+    "codacy-coverage": "^2.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nock": "^9.0.2",
