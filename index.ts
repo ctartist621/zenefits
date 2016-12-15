@@ -42,6 +42,10 @@ export default class Zenefits implements ZenefitsInterface {
         url = `${this.coreBaseUrl}/${type}/`;
         break;
       }
+      case "company_banks": {
+        url = `${this.coreBaseUrl}/${type}/`;
+        break;
+      }
       default: {
         throw new Error("Request Type not defined");
       }
@@ -99,4 +103,10 @@ export default class Zenefits implements ZenefitsInterface {
     this.get("employments", employmentId, cb);
   }
 
+  companyBankAccounts(cb: any) {
+    this.get("company_banks", undefined, cb);
+  }
+  companyBankAccount(accountId: string, cb: any) {
+    this.get("company_banks", accountId, cb);
+  }
 }

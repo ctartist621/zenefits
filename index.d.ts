@@ -86,6 +86,20 @@ declare namespace Zenefits {
     hourly
   }
 
+  interface CompanyBankAccount {
+    company: Reference;
+    account_type: AccountType;
+    account_number: number;
+    routing_number: number;
+    bank_name: string;
+    id: string;
+  }
+
+  enum AccountType {
+    checking,
+    savings
+  }
+
   interface Reference {
     url: string;
     object: string;

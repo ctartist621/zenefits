@@ -53,3 +53,4 @@ jspm_packages
 /.DS_Store
 /test/testCreds.json
 /test/.DS_Store
+*.js

@@ -74,7 +74,8 @@ const isPerson = function(p: Zenefits.Person) {
     "postal_code",
     "social_security_number",
     "gender",
-    "title"
+    "title",
+    "id",
   ]);
 };
 
@@ -89,6 +90,18 @@ const isEmployment = function(p: Zenefits.Employment) {
     "annual_salary",
     "pay_rate",
     "working_hours_per_week",
+    "id",
+  ]);
+};
+
+const isCompanyBankAccount = function(p: Zenefits.Employment) {
+  expect(p).to.contain.any.keys([
+    "company",
+    "account_type",
+    "account_number",
+    "routing_number",
+    "bank_name",
+    "id",
   ]);
 };
 
@@ -195,4 +208,36 @@ describe("Core API", function() {
     });
   });
 
+  describe("#Company Bank Accounts", function() {
+    it("should get a list of company bank accounts", function(done: any) {
+      nockBack("CompanyBankAccountsFixture.json", function(nockDone: any) {
+        client.companyBankAccounts(function(err: any, resp: Zenefits.CompanyBankAccount[]) {
+          expect(err).not.exist;
+          expect(resp).to.be.instanceof(Array);
+
+          _.forEach(resp, function(r) {
+            isCompanyBankAccount(r);
+          });
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should get a single company bank account", function(done: any) {
+      nockBack("CompanyBankAccountsFixture.json", function(nockDone1: any) {
+        client.companyBankAccounts((err: any, accounts: Zenefits.CompanyBankAccount[]) => {
+          nockBack("CompanyBankAccountFixture.json", function(nockDone2: any) {
+            client.companyBankAccount(_.head(accounts).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isCompanyBankAccount(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
 });
