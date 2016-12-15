@@ -2,6 +2,10 @@ machine:
   node:
     version: 0.12.9
 
+compile:
+  override:
+    - tsc  
+
 deployment:
   npm:
     branch: master
