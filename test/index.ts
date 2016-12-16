@@ -76,6 +76,7 @@ const isPerson = function(p: Zenefits.Person) {
     "gender",
     "title",
     "id",
+    "object",
   ]);
 };
 
@@ -91,6 +92,7 @@ const isEmployment = function(p: Zenefits.Employment) {
     "pay_rate",
     "working_hours_per_week",
     "id",
+    "object",
   ]);
 };
 
@@ -102,6 +104,7 @@ const isCompanyBankAccount = function(p: Zenefits.CompanyBankAccount) {
     "routing_number",
     "bank_name",
     "id",
+    "object",
   ]);
 };
 
@@ -113,6 +116,7 @@ const isEmployeeBankAccount = function(p: Zenefits.EmployeeBankAccount) {
     "routing_number",
     "bank_name",
     "id",
+    "object",
   ]);
 };
 
@@ -123,6 +127,23 @@ const isDepartment = function(p: Zenefits.Department) {
     "company",
     "name",
     "object",
+  ]);
+};
+
+
+const isLocation = function(p: Zenefits.Location) {
+  expect(p).to.contain.any.keys([
+    "id",
+    "city",
+    "company",
+    "country",
+    "name",
+    "object",
+    "people",
+    "state",
+    "street1",
+    "street2",
+    "zip"
   ]);
 };
 
@@ -318,6 +339,39 @@ describe("Core API", function() {
             client.department(_.head(departments).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isDepartment(resp);
+              nockDone1();
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+
+  describe("#Locations", function() {
+    it("should get a list of locations", function(done: any) {
+      nockBack("LocationsFixture.json", function(nockDone: any) {
+        client.locations(function(err: any, resp: Zenefits.Location[]) {
+          expect(err).not.exist;
+          expect(resp).to.be.instanceof(Array);
+
+          _.forEach(resp, function(r: any) {
+            isLocation(r);
+          });
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should get a single location", function(done: any) {
+      nockBack("LocationsFixture.json", function(nockDone1: any) {
+        client.locations((err: any, locations: Zenefits.Location[]) => {
+          nockBack("LocationFixture.json", function(nockDone2: any) {
+            client.location(_.head(locations).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isLocation(resp);
               nockDone1();
               nockDone2();
               done();

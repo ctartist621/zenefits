@@ -21,39 +21,7 @@ export default class Zenefits {
   }
 
   get(type: string, id: string, cb?: any) {
-    let url = "";
-    // switch (type) {
-    //   case "companies": {
-    //     url = `${this.coreBaseUrl}/${type}/`;
-    //     break;
-    //   }
-    //   case "people": {
-    //     url = `${this.coreBaseUrl}/${type}/`;
-    //     break;
-    //   }
-    //   case "employments": {
-    //     url = `${this.coreBaseUrl}/${type}/`;
-    //     break;
-    //   }
-    //   case "company_banks": {
-    //     url = `${this.coreBaseUrl}/${type}/`;
-    //     break;
-    //   }
-    //   case "banks": {
-    //     url = `${this.coreBaseUrl}/${type}/`;
-    //     break;
-    //   }
-    //   case "departments": {
-    //     url = `${this.coreBaseUrl}/${type}/`;
-    //     break;
-    //   }
-    //   default: {
-    //     throw new Error("Request Type not defined");
-    //   }
-    // }
-
-    url = `${this.coreBaseUrl}/${type}/`;
-
+    let url = `${this.coreBaseUrl}/${type}/`;
 
     if (!_.isUndefined(id)) {
       url += id;
@@ -64,6 +32,7 @@ export default class Zenefits {
         Authorization: `Bearer ${this.bearerKey}`
       }
     };
+
     needle.get(url, options, function(err: any, resp: any, body: any) {
       let ret = {};
       if (body && body.data.data) {
@@ -136,5 +105,12 @@ export default class Zenefits {
 
   department(deptId: string, cb: any) {
     this.get("departments", deptId, cb);
+  }
+  locations(cb: any) {
+    this.get("locations", undefined, cb);
+  }
+
+  location(locId: string, cb: any) {
+    this.get("locations", locId, cb);
   }
 }

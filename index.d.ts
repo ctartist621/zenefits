@@ -1,10 +1,11 @@
 declare namespace Zenefits {
   interface Company {
     name: string;
+    object: string;
+    id: string;
     people: Reference[];
     url: string;
     logo_url: string;
-    id: string;
   }
 
   interface Person {
@@ -17,11 +18,11 @@ declare namespace Zenefits {
     employments: Reference;
     first_name: string;
     preferred_name: string;
+    object: string;
     id: string;
     last_name: string;
     location: Reference;
     manager: Reference;
-    object: string;
     postal_code: string;
     state: string;
     status: Status;
@@ -54,6 +55,7 @@ declare namespace Zenefits {
   interface Employment {
     person: Reference;
     hire_date: string;
+    object: string;
     id: string;
     termination_date: string;
     termination_type: TerminationType;
@@ -92,6 +94,7 @@ declare namespace Zenefits {
     account_number: number;
     routing_number: number;
     bank_name: string;
+    object: string;
     id: string;
   }
 
@@ -112,14 +115,30 @@ declare namespace Zenefits {
     account_number: number;
     routing_number: number;
     bank_name: string;
+    object: string;
     id: string;
   }
 
   interface Department {
     id: string;
     name: string;
-    people: Reference,
-    company: Reference,
-    object: string,
+    people: Reference;
+    company: Reference;
+    object: string;
+  }
+
+  interface Location {
+    id: string;
+    city: string;
+    company: Reference;
+    country: string;
+    name: string;
+    object: string;
+    people: Reference;
+    state: string;
+    street1: string;
+    street2: string;
+    zip: string;
+  }
   }
 }

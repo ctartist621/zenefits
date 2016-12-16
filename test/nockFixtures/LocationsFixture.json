@@ -1,0 +1,101 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "get",
+        "path": "/core/locations/",
+        "body": "",
+        "status": 200,
+        "response": {
+            "status": 200,
+            "object": "/meta/response",
+            "data": {
+                "url": "https://api.zenefits.com/core/locations",
+                "next_url": null,
+                "object": "/meta/list",
+                "data": [
+                {
+                  "city": "Beverly Hills",
+                  "company": {
+                    "object": "/meta/ref/detail",
+                    "ref_object": "/core/companies",
+                    "url": "https://api.zenefits.com/core/companies/1"
+                  },
+                  "country": "US",
+                  "id": "1",
+                  "name": "Beverly Hills",
+                  "object": "/core/locations",
+                  "people": {
+                    "object": "/meta/ref/list",
+                    "ref_object": "/core/people",
+                    "url": "https://api.zenefits.com/core/locations/1/people"
+                  },
+                  "phone": "6505551234",
+                  "state": "CA",
+                  "street1": "303 2nd St.",
+                  "street2": "Suite 450",
+                  "zip": "90210"
+                },
+                {
+                  "city": null,
+                  "company": {
+                    "object": "/meta/ref/detail",
+                    "ref_object": "/core/companies",
+                    "url": "https://api.zenefits.com/core/companies/1"
+                  },
+                  "country": "US",
+                  "id": "2",
+                  "name": "123 First Street",
+                  "object": "/core/locations",
+                  "people": {
+                    "object": "/meta/ref/list",
+                    "ref_object": "/core/people",
+                    "url": "https://api.zenefits.com/core/locations/2/people"
+                  },
+                  "phone": null,
+                  "state": null,
+                  "street1": null,
+                  "street2": null,
+                  "zip": null
+                }
+              ]
+            },
+            "error": null
+        },
+        "rawHeaders": [
+            "Date",
+            "Thu, 15 Dec 2016 20:03:11 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "Zenefits-Version",
+            "2015-12-15",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Thu, 15 Dec 2016 20:03:10 GMT",
+            "Server",
+            ""
+        ]
+    }
+]
