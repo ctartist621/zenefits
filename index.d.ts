@@ -7,7 +7,6 @@ declare namespace Zenefits {
     url: string;
     logo_url: string;
   }
-
   interface Person {
     banks: Reference;
     city: string;
@@ -25,7 +24,7 @@ declare namespace Zenefits {
     manager: Reference;
     postal_code: string;
     state: string;
-    status: Status;
+    status: string;
     street1: string;
     street2: string;
     subordinates: Reference;
@@ -37,78 +36,68 @@ declare namespace Zenefits {
     gender: Gender;
     social_security_number: string;
   }
-
-  enum Status {
-    active,
-    terminated,
-    leave_of_absence,
-    requested,
-    setup,
-    deleted
-  }
-
-  enum Gender {
-    F,
-    M
-  }
-
+  // enum Status {
+  //   active,
+  //   terminated,
+  //   leave_of_absence,
+  //   requested,
+  //   setup,
+  //   deleted
+  // }
+  // enum Gender {
+  //   F,
+  //   M
+  // }
   interface Employment {
     person: Reference;
     hire_date: string;
     object: string;
     id: string;
     termination_date: string;
-    termination_type: TerminationType;
-    employment_type: EmploymentType;
-    comp_type: CompType;
+    termination_type: string;
+    employment_type: string;
+    comp_type: string;
     annual_salary: number;
     pay_rate: number;
     working_hours_per_week: number;
   }
-
-  enum TerminationType {
-    involuntary,
-    regretted,
-    non_regretted,
-    unclassified,
-    never_started
-  }
-
-  enum EmploymentType {
-    full_time,
-    part_time,
-    temporary,
-    casual,
-    contract,
-    labor_hire
-  }
-
-  enum CompType {
-    salary,
-    hourly
-  }
-
+  // enum TerminationType {
+  //   involuntary,
+  //   regretted,
+  //   non_regretted,
+  //   unclassified,
+  //   never_started
+  // }
+  // enum EmploymentType {
+  //   full_time,
+  //   part_time,
+  //   temporary,
+  //   casual,
+  //   contract,
+  //   labor_hire
+  // }
+  // enum CompType {
+  //   salary,
+  //   hourly
+  // }
   interface CompanyBankAccount {
     company: Reference;
-    account_type: AccountType;
+    account_type: string;
     account_number: number;
     routing_number: number;
     bank_name: string;
     object: string;
     id: string;
   }
-
-  enum AccountType {
-    checking,
-    savings
-  }
-
+  // enum AccountType {
+  //   checking,
+  //   savings
+  // }
   interface Reference {
     url: string;
     object: string;
     ref_object: string;
   }
-
   interface EmployeeBankAccount {
     person: Reference;
     account_type: AccountType;
@@ -118,7 +107,6 @@ declare namespace Zenefits {
     object: string;
     id: string;
   }
-
   interface Department {
     id: string;
     name: string;
@@ -126,19 +114,56 @@ declare namespace Zenefits {
     company: Reference;
     object: string;
   }
-
   interface Location {
     id: string;
+    object: string;
     city: string;
     company: Reference;
     country: string;
     name: string;
-    object: string;
     people: Reference;
     state: string;
     street1: string;
     street2: string;
     zip: string;
   }
+  interface AuthorizedUser {
+    id: string;
+    object: string;
+    company: Reference;
+    person: Reference;
+    scopes: string[],
+    expires: string;
+    uninstalled: string;
+
   }
+
+  // enum Scope {
+  //   platform,
+  //   companies,
+  //   companies.legal_name,
+  //   companies.ein,
+  //   companies.legal_address,
+  //   locations,
+  //   departments,
+  //   people,
+  //   people.work_email,
+  //   people.personal_email,
+  //   people.work_phone,
+  //   people.personal_phone,
+  //   people.date_of_birth,
+  //   people.home_address,
+  //   people.status,
+  //   people.location,
+  //   people.department,
+  //   people.manager,
+  //   people.social_security_number,
+  //   people.gender,
+  //   employments,
+  //   employments.employment_type,
+  //   employments.termination_type,
+  //   employments.compensation,
+  //   banks,
+  //   company_banks
+  // }
 }

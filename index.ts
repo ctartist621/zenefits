@@ -113,4 +113,8 @@ export default class Zenefits {
   location(locId: string, cb: any) {
     this.get("locations", locId, cb);
   }
+
+  currentAuthorizedUser(cb: any) {
+    this.get("me", undefined, cb)
+  }
 }

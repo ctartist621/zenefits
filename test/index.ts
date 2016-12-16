@@ -130,7 +130,6 @@ const isDepartment = function(p: Zenefits.Department) {
   ]);
 };
 
-
 const isLocation = function(p: Zenefits.Location) {
   expect(p).to.contain.any.keys([
     "id",
@@ -144,6 +143,18 @@ const isLocation = function(p: Zenefits.Location) {
     "street1",
     "street2",
     "zip"
+  ]);
+};
+
+const isAuthedUser = function(p: Zenefits.AuthorizedUser) {
+  expect(p).to.contain.any.keys([
+    "id",
+    "object",
+    "company",
+    "person",
+    "scopes",
+    "expires",
+    "uninstalled",
   ]);
 };
 
@@ -381,4 +392,17 @@ describe("Core API", function() {
       });
     });
   });
+
+  describe("#Me", function() {
+    it("should get information about the currently authorized user", function(done: any) {
+      nockBack("MeFixture.json", function(nockDone: any) {
+        client.currentAuthorizedUser(function(err: any, resp: Zenefits.AuthorizedUser) {
+          expect(err).not.exist;
+          isAuthedUser(resp);
+          nockDone();
+          done();
+        });
+      });
+    });
+
 });
