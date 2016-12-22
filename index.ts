@@ -118,3 +118,5 @@ export default class Zenefits {
     this.get("me", undefined, cb)
   }
 }
+
+export { Zenefits };

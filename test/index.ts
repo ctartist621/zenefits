@@ -9,7 +9,7 @@ import fs = require("fs");
 import path = require("path");
 import chai = require("chai");
 const expect = chai.expect;
-import Zenefits from "../index";
+import { Zenefits } from "../index";
 
 let client = new Zenefits();
 
@@ -404,5 +404,5 @@ describe("Core API", function() {
         });
       });
     });
-
+  });
 });

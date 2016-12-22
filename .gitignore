@@ -54,3 +54,4 @@ jspm_packages
 /test/testCreds.json
 /test/.DS_Store
 *.js
+.tags_sorted_by_file
