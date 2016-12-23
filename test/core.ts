@@ -30,7 +30,7 @@ import nock = require("nock");
 let nockBack = require("nock").back;
 
 nockBack.fixtures = __dirname + "/nockFixtures";
-nockBack.setMode("wild");
+nockBack.setMode("record");
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -213,7 +213,7 @@ describe("Core API", function() {
       });
     });
 
-    it.only("should get a single person", function(done: any) {
+    it("should get a single person", function(done: any) {
       nockBack("PeopleFixture.json", function(nockDone1: any) {
         client.people((err: any, people: any) => {
           nockBack("PersonFixture.json", function(nockDone2: any) {

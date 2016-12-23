@@ -32,7 +32,7 @@ import nock = require("nock");
 let nockBack = require("nock").back;
 
 nockBack.fixtures = __dirname + "/nockFixtures";
-nockBack.setMode("wild");
+nockBack.setMode("record");
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -94,7 +94,7 @@ describe("Platform API", function() {
 
   describe("#Set Installation Status", function() {
       nockBack.setMode("wild");
-      it.only("should set installation status to 'ok'", function(done: any) {
+      it("should set installation status to 'ok'", function(done: any) {
 
           async.auto({
               setToOk: function(autoCallback: any) {
