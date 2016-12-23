@@ -1,4 +1,4 @@
-declare namespace Zenefits {
+declare namespace ZenefitsCore {
   interface Company {
     name: string;
     object: string;
@@ -33,7 +33,7 @@ declare namespace Zenefits {
     personal_email: string;
     work_phone: string;
     personal_phone: string;
-    gender: Gender;
+    gender: string;
     social_security_number: string;
   }
   // enum Status {
@@ -100,7 +100,7 @@ declare namespace Zenefits {
   }
   interface EmployeeBankAccount {
     person: Reference;
-    account_type: AccountType;
+    account_type: string;
     account_number: number;
     routing_number: number;
     bank_name: string;
@@ -166,4 +166,16 @@ declare namespace Zenefits {
   //   banks,
   //   company_banks
   // }
+}
+
+declare namespace ZenefitsPlatform {
+  interface Installation {
+    url: string,
+    fields: any,
+    company: ZenefitsCore.Reference,
+    object: string,
+    application: ZenefitsCore.Reference,
+    person_subscriptions: ZenefitsCore.Reference,
+    id: string
+  }
 }

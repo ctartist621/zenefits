@@ -13,6 +13,8 @@ export default class Zenefits {
   urlBase: string;
   platformBaseUrl: string;
   coreBaseUrl: string;
+  installId: string;
+  set: any;
 
   constructor(bearerKey?: string) {
     this.bearerKey = bearerKey;
@@ -20,25 +22,28 @@ export default class Zenefits {
     this.coreBaseUrl = "https://api.zenefits.com/core";
   }
 
-  get(type: string, id: string, cb?: any) {
-    let url = `${this.coreBaseUrl}/${type}/`;
-
-    if (!_.isUndefined(id)) {
-      url += id;
-    };
-
-    const options = {
+  _request(method: string, url: string, data:any, cb: any) {
+    let options = {
       headers: {
-        Authorization: `Bearer ${this.bearerKey}`
-      }
+        Authorization: `Bearer ${this.bearerKey}`,
+        "Content-Type": "application/json"
+      },
+      json: method === 'post' ? true : false
     };
 
-    needle.get(url, options, function(err: any, resp: any, body: any) {
+    if(method === "post") {
+      // code...
+    } else {
+      delete options.headers["Content-Type"];
+    }
+
+    needle.request(method, url, data, options, function(err: any, resp: any, body: any) {
       let ret = {};
       if (body && body.data.data) {
-        ret = body.data.data;
+          ret = body.data.data;
       } else if (body && body.data) {
-        ret = body.data;
+          ret = body.data;
+      } else if (resp && resp.statusCode < 400) {
       } else {
         err = {
           code: resp && resp.statusCode,
@@ -49,6 +54,33 @@ export default class Zenefits {
       }
       cb(err, ret);
     });
+
+  }
+
+  core(type: string, id: string, cb: any) {
+    let url = `${this.coreBaseUrl}/${type}/`;
+
+    if (!_.isUndefined(id)) {
+      url += id;
+    };
+
+    this._request('get', url, undefined, cb)
+  }
+
+  platform(method: string, type: string, id: string, data: any, cb?: any) {
+    let url = `${this.platformBaseUrl}/${type}/`;
+    switch (type) {
+      case "installationStatus":
+        url = `${this.platformBaseUrl}/company_installs/${id}/status_changes/`;
+        break;
+
+      default:
+        if (!_.isUndefined(id)) {
+          url += id;
+        };
+        break;
+    }
+    this._request(method, url, data, cb);
   }
 
   singleReturn(error: any, response: any, cb: any) {
@@ -60,62 +92,99 @@ export default class Zenefits {
   }
 
   companies(cb: any) {
-    this.get("companies", undefined, cb);
+    this.core("companies", undefined, cb);
   }
 
   company(companyId: string, cb: any) {
-    this.get("companies", companyId, cb);
+    this.core("companies", companyId, cb);
   }
 
   people(cb: any) {
-    this.get("people", undefined, cb);
+    this.core("people", undefined, cb);
   }
 
   person(personId: string, cb: any) {
-    this.get("people", personId, cb);
+    this.core("people", personId, cb);
   }
 
   employments(cb: any) {
-    this.get("employments", undefined, cb);
+    this.core("employments", undefined, cb);
   }
 
   employment(employmentId: string, cb: any) {
-    this.get("employments", employmentId, cb);
+    this.core("employments", employmentId, cb);
   }
 
   companyBankAccounts(cb: any) {
-    this.get("company_banks", undefined, cb);
+    this.core("company_banks", undefined, cb);
   }
 
   companyBankAccount(accountId: string, cb: any) {
-    this.get("company_banks", accountId, cb);
+    this.core("company_banks", accountId, cb);
   }
 
   employeeBankAccounts(cb: any) {
-    this.get("banks", undefined, cb);
+    this.core("banks", undefined, cb);
   }
 
   employeeBankAccount(accountId: string, cb: any) {
-    this.get("banks", accountId, cb);
+    this.core("banks", accountId, cb);
   }
 
   departments(cb: any) {
-    this.get("departments", undefined, cb);
+    this.core("departments", undefined, cb);
   }
 
   department(deptId: string, cb: any) {
-    this.get("departments", deptId, cb);
+    this.core("departments", deptId, cb);
   }
   locations(cb: any) {
-    this.get("locations", undefined, cb);
+    this.core("locations", undefined, cb);
   }
 
   location(locId: string, cb: any) {
-    this.get("locations", locId, cb);
+    this.core("locations", locId, cb);
   }
 
   currentAuthorizedUser(cb: any) {
-    this.get("me", undefined, cb)
+    this.core("me", undefined, cb)
+  }
+
+  installations(cb: any) {
+    this.platform('get', 'company_installs', undefined, undefined, cb);
+  }
+
+  installation(installId: string, cb: any) {
+    this.platform('get', 'company_installs', installId, undefined, cb);
+  }
+
+  setInstallationStatusOk(cb: any) {
+      if (this.installId) {
+          this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
+      } else {
+          this.installations((err: any, installations: ZenefitsPlatform.Installation[]) => {
+              if (err) {
+                  cb(err);
+              } else {
+                  this.installId = _.head(installations).id;
+                  this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
+              }
+          });
+      }
+  }
+  setInstallationStatusNotEnrolled(cb: any) {
+      if (this.installId) {
+          this.platform('post', 'installationStatus', this.installId, { status: "not_enrolled" }, cb);
+      } else {
+          this.installations((err: any, installations: ZenefitsPlatform.Installation[]) => {
+              if (err) {
+                  cb(err);
+              } else {
+                  this.installId = _.head(installations).id;
+                  this.platform('post', 'installationStatus', this.installId, { status: "not_enrolled" }, cb);
+              }
+          });
+      }
   }
 }
 

@@ -1,0 +1,42 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "post",
+        "path": "/platform/company_installs/6053217/status_changes/",
+        "body": {
+            "status": "not_enrolled"
+        },
+        "status": 204,
+        "response": "",
+        "rawHeaders": [
+            "Date",
+            "Fri, 23 Dec 2016 16:00:00 GMT",
+            "Content-Type",
+            "text/html; charset=utf-8",
+            "Content-Length",
+            "0",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Fri, 23 Dec 2016 15:59:59 GMT",
+            "Server",
+            ""
+        ]
+    }
+]
