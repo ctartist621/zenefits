@@ -30,7 +30,7 @@ import nock = require("nock");
 let nockBack = require("nock").back;
 
 nockBack.fixtures = __dirname + "/nockFixtures";
-nockBack.setMode("record");
+nockBack.setMode("wild");
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -38,7 +38,7 @@ const hookAfter = function() {
   // fs.appendFileSync(__dirname + "/nockFixtures/fixtures.js", nock.recorder.play());
 };
 
-const isCompany = function(c: ZenefitsCore.Company) {
+const isCompany = function(c: any) {
   expect(c).to.contain.any.keys([
     "name",
     "people",
@@ -49,7 +49,7 @@ const isCompany = function(c: ZenefitsCore.Company) {
   ]);
 };
 
-const isPerson = function(p: ZenefitsCore.Person) {
+const isPerson = function(p: any) {
   expect(p).to.contain.any.keys([
     "company",
     "employments",
@@ -81,7 +81,7 @@ const isPerson = function(p: ZenefitsCore.Person) {
   ]);
 };
 
-const isEmployment = function(p: ZenefitsCore.Employment) {
+const isEmployment = function(p: any) {
   expect(p).to.contain.any.keys([
     "person",
     "hire_date",
@@ -97,7 +97,7 @@ const isEmployment = function(p: ZenefitsCore.Employment) {
   ]);
 };
 
-const isCompanyBankAccount = function(p: ZenefitsCore.CompanyBankAccount) {
+const isCompanyBankAccount = function(p: any) {
   expect(p).to.contain.any.keys([
     "company",
     "account_type",
@@ -109,7 +109,7 @@ const isCompanyBankAccount = function(p: ZenefitsCore.CompanyBankAccount) {
   ]);
 };
 
-const isEmployeeBankAccount = function(p: ZenefitsCore.EmployeeBankAccount) {
+const isEmployeeBankAccount = function(p: any) {
   expect(p).to.contain.any.keys([
     "person",
     "account_type",
@@ -121,7 +121,7 @@ const isEmployeeBankAccount = function(p: ZenefitsCore.EmployeeBankAccount) {
   ]);
 };
 
-const isDepartment = function(p: ZenefitsCore.Department) {
+const isDepartment = function(p: any) {
   expect(p).to.contain.any.keys([
     "people",
     "id",
@@ -131,7 +131,7 @@ const isDepartment = function(p: ZenefitsCore.Department) {
   ]);
 };
 
-const isLocation = function(p: ZenefitsCore.Location) {
+const isLocation = function(p: any) {
   expect(p).to.contain.any.keys([
     "id",
     "city",
@@ -147,7 +147,7 @@ const isLocation = function(p: ZenefitsCore.Location) {
   ]);
 };
 
-const isAuthedUser = function(p: ZenefitsCore.AuthorizedUser) {
+const isAuthedUser = function(p: any) {
   expect(p).to.contain.any.keys([
     "id",
     "object",
@@ -182,9 +182,9 @@ describe("Core API", function() {
 
     it("should get a single company", function(done: any) {
       nockBack("CompaniesFixture.json", function(nockDone1: any) {
-        client.companies((err: any, companies: ZenefitsCore.Company[]) => {
+        client.companies((err: any, companies: any) => {
           nockBack("CompanyFixture.json", function(nockDone2: any) {
-            client.company(_.head(companies).id, (err: any, resp: any) => {
+            client.company((<ZenefitsCore.Company>_.head(companies)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isCompany(resp.data);
               nockDone1();
@@ -200,7 +200,7 @@ describe("Core API", function() {
   describe("#People", function() {
     it("should get a list of people", function(done: any) {
       nockBack("PeopleFixture.json", function(nockDone: any) {
-        client.people(function(err: any, resp: ZenefitsCore.Person[]) {
+        client.people(function(err: any, resp: any) {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
@@ -213,11 +213,11 @@ describe("Core API", function() {
       });
     });
 
-    it("should get a single person", function(done: any) {
+    it.only("should get a single person", function(done: any) {
       nockBack("PeopleFixture.json", function(nockDone1: any) {
-        client.people((err: any, people: ZenefitsCore.Person[]) => {
+        client.people((err: any, people: any) => {
           nockBack("PersonFixture.json", function(nockDone2: any) {
-            client.person(_.head(people).id, (err: any, resp: any) => {
+              client.person((<ZenefitsCore.Person>_.head(people.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isPerson(resp.data);
               nockDone1();
@@ -233,7 +233,7 @@ describe("Core API", function() {
   describe("#Employments", function() {
     it("should get a list of employments", function(done: any) {
       nockBack("EmploymentsFixture.json", function(nockDone: any) {
-        client.employments(function(err: any, resp: ZenefitsCore.Employment[]) {
+        client.employments(function(err: any, resp: any) {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
@@ -248,9 +248,9 @@ describe("Core API", function() {
 
     it("should get a single employment", function(done: any) {
       nockBack("EmploymentsFixture.json", function(nockDone1: any) {
-        client.employments((err: any, employments: ZenefitsCore.Employment[]) => {
+        client.employments((err: any, employments: any) => {
           nockBack("EmploymentFixture.json", function(nockDone2: any) {
-            client.employment(_.head(employments).id, (err: any, resp: any) => {
+              client.employment((<ZenefitsCore.Employment>_.head(employments)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isEmployment(resp.data);
               nockDone1();
@@ -266,7 +266,7 @@ describe("Core API", function() {
   describe("#Company Bank Accounts", function() {
     it("should get a list of company bank accounts", function(done: any) {
       nockBack("CompanyBankAccountsFixture.json", function(nockDone: any) {
-        client.companyBankAccounts(function(err: any, resp: ZenefitsCore.CompanyBankAccount[]) {
+        client.companyBankAccounts(function(err: any, resp: any) {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
@@ -281,9 +281,9 @@ describe("Core API", function() {
 
     it("should get a single company bank account", function(done: any) {
       nockBack("CompanyBankAccountsFixture.json", function(nockDone1: any) {
-        client.companyBankAccounts((err: any, accounts: ZenefitsCore.CompanyBankAccount[]) => {
+        client.companyBankAccounts((err: any, accounts: any) => {
           nockBack("CompanyBankAccountFixture.json", function(nockDone2: any) {
-            client.companyBankAccount(_.head(accounts).id, (err: any, resp: any) => {
+              client.companyBankAccount((<ZenefitsCore.CompanyBankAccount>_.head(accounts)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isCompanyBankAccount(resp.data);
               nockDone1();
@@ -299,7 +299,7 @@ describe("Core API", function() {
   describe("#Employee Bank Accounts", function() {
     it("should get a list of employee bank accounts", function(done: any) {
       nockBack("EmployeeBankAccountsFixture.json", function(nockDone: any) {
-        client.employeeBankAccounts(function(err: any, resp: ZenefitsCore.EmployeeBankAccount[]) {
+        client.employeeBankAccounts(function(err: any, resp: any) {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
@@ -314,9 +314,9 @@ describe("Core API", function() {
 
     it("should get a single employee bank account", function(done: any) {
       nockBack("EmployeeBankAccountsFixture.json", function(nockDone1: any) {
-        client.employeeBankAccounts((err: any, accounts: ZenefitsCore.EmployeeBankAccount[]) => {
+        client.employeeBankAccounts((err: any, accounts: any) => {
           nockBack("EmployeeBankAccountFixture.json", function(nockDone2: any) {
-            client.employeeBankAccount(_.head(accounts).id, (err: any, resp: any) => {
+              client.employeeBankAccount((<ZenefitsCore.EmployeeBankAccount>_.head(accounts)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isEmployeeBankAccount(resp.data);
               nockDone1();
@@ -332,7 +332,7 @@ describe("Core API", function() {
   describe("#Departments", function() {
     it("should get a list of departments", function(done: any) {
       nockBack("DepartmentsFixture.json", function(nockDone: any) {
-        client.departments(function(err: any, resp: ZenefitsCore.Department[]) {
+        client.departments(function(err: any, resp: any) {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
@@ -347,9 +347,9 @@ describe("Core API", function() {
 
     it("should get a single department", function(done: any) {
       nockBack("DepartmentsFixture.json", function(nockDone1: any) {
-        client.departments((err: any, departments: ZenefitsCore.Department[]) => {
+        client.departments((err: any, departments: any) => {
           nockBack("DepartmentFixture.json", function(nockDone2: any) {
-            client.department(_.head(departments).id, (err: any, resp: any) => {
+              client.department((<ZenefitsCore.Department>_.head(departments)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isDepartment(resp.data);
               nockDone1();
@@ -365,7 +365,7 @@ describe("Core API", function() {
   describe("#Locations", function() {
     it("should get a list of locations", function(done: any) {
       nockBack("LocationsFixture.json", function(nockDone: any) {
-        client.locations(function(err: any, resp: ZenefitsCore.Location[]) {
+        client.locations(function(err: any, resp: any) {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
@@ -380,9 +380,9 @@ describe("Core API", function() {
 
     it("should get a single location", function(done: any) {
       nockBack("LocationsFixture.json", function(nockDone1: any) {
-        client.locations((err: any, locations: ZenefitsCore.Location[]) => {
+        client.locations((err: any, locations: any) => {
           nockBack("LocationFixture.json", function(nockDone2: any) {
-            client.location(_.head(locations).id, (err: any, resp: any) => {
+              client.location((<ZenefitsCore.Location>_.head(locations)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isLocation(resp.data);
               nockDone1();
@@ -398,7 +398,7 @@ describe("Core API", function() {
   describe("#Me", function() {
     it("should get information about the currently authorized user", function(done: any) {
       nockBack("MeFixture.json", function(nockDone: any) {
-        client.currentAuthorizedUser(function(err: any, resp: ZenefitsCore.AuthorizedUser) {
+        client.currentAuthorizedUser(function(err: any, resp: any) {
           expect(err).not.exist;
           isAuthedUser(resp.data);
           nockDone();

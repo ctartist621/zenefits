@@ -92,71 +92,71 @@ describe("Platform API", function() {
     });
   });
 
-
   describe("#Set Installation Status", function() {
-    nockBack.setMode("wild");
-    it.only("should set installation status to 'ok'", function(done: any) {
+      nockBack.setMode("wild");
+      it.only("should set installation status to 'ok'", function(done: any) {
 
-      async.auto({
-        setToOk: function(autoCallback: any) {
-          nockBack("SetCompanyInstallationStatusOk.json", function(nockDone: any) {
-            client.setInstallationStatusOk(function(err: any, resp: any) {
-              expect(err).to.not.exist;
-              expect(resp.data).to.be.empty;
+          async.auto({
+              setToOk: function(autoCallback: any) {
+                  nockBack("SetCompanyInstallationStatusOk.json", function(nockDone: any) {
+                      client.setInstallationStatusOk(function(err: any, resp: any) {
+                          expect(err).to.not.exist;
+                          expect(resp.data).to.be.empty;
 
-              nockDone();
-              autoCallback(err);
-            });
+                          nockDone();
+                          autoCallback(err);
+                      });
+                  });
+              },
+              checkOk: ['setToOk', function(results: any, autoCallback: any) {
+                  nockBack("PostSetCompanyInstallationStatusOk.json", function(nockDone: any) {
+                      client.installations(function(err: any, resp: any) {
+                          expect(err).not.exist;
+                          expect(resp.data).to.be.instanceof(Array);
+
+                          _.forEach(resp.data, function(r: any) {
+                              expect(r.status).to.be.equal('ok');
+                          });
+                          nockDone();
+
+                          autoCallback(err);
+
+                      });
+                  });
+              }]
+          }, Infinity, done);
+
+          it("should set installation status to 'not_enrolled'", function(done: any) {
+              this.timeout(6000);
+
+              async.auto({
+                  setToNotEnrolled: function(autoCallback: any) {
+                      nockBack("SetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
+                          client.setInstallationStatusNotEnrolled(function(err: any, resp: any) {
+                              expect(err).to.not.exist;
+                              expect(resp.data).to.be.empty;
+
+                              nockDone();
+                              autoCallback(err);
+                          });
+                      });
+                  },
+                  checkNotEnrolled: ['setToNotEnrolled', function(results: any, autoCallback: any) {
+                      nockBack("PostSetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
+                          client.installations(function(err: any, resp: any) {
+                              expect(err).not.exist;
+                              expect(resp.data).to.be.instanceof(Array);
+
+                              _.forEach(resp.data, function(r: any) {
+                                  expect(r.status).to.be.equal('not_enrolled');
+                              });
+                              nockDone();
+                              autoCallback(err);
+                          });
+                      });
+                  }]
+              }, Infinity, done)
           });
-        },
-        checkOk: ['setToOk', function(results: any, autoCallback: any) {
-          nockBack("PostSetCompanyInstallationStatusOk.json", function(nockDone: any) {
-            client.installations(function(err: any, resp: any) {
-              expect(err).not.exist;
-              expect(resp.data).to.be.instanceof(Array);
-
-              _.forEach(resp.data, function(r: any) {
-                expect(r.status).to.be.equal('ok');
-              });
-              nockDone();
-
-              autoCallback(err);
-
-            });
-          });
-        }]
-    }, Infinity, done);
-
-    it("should set installation status to 'not_enrolled'", function(done: any) {
-      this.timeout(6000);
-
-      async.auto({
-        setToNotEnrolled: function(autoCallback: any) {
-          nockBack("SetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
-            client.setInstallationStatusNotEnrolled(function(err: any, resp: any) {
-              expect(err).to.not.exist;
-              expect(resp.data).to.be.empty;
-
-              nockDone();
-              autoCallback(err);
-            });
-          });
-        },
-        checkNotEnrolled: ['setToNotEnrolled', function(results: any, autoCallback: any) {
-          nockBack("PostSetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
-            client.installations(function(err: any, resp: any) {
-              expect(err).not.exist;
-              expect(resp.data).to.be.instanceof(Array);
-
-              _.forEach(resp.data, function(r: any) {
-                expect(r.status).to.be.equal('not_enrolled');
-              });
-              nockDone();
-              autoCallback(err);
-              });
-          });
-        }]
-      }, Infinity, done)
-    });
+      });
   });
 });
