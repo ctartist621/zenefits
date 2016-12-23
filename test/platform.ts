@@ -13,11 +13,11 @@ import chai = require("chai");
 const expect = chai.expect;
 import { Zenefits } from "../index";
 
-let client = new Zenefits();
 
 if (process.env.CIRCLECI) {
+  let client = new Zenefits();
 } else {
-  client.bearerKey = require("./testCreds.json").bearerKey;
+  let client = new Zenefits(require("./testCreds.json"));
 }
 
 import nock = require("nock");
@@ -40,7 +40,6 @@ const hookAfter = function() {
 };
 
 const isInstallation = function(p: ZenefitsPlatform.Installation) {
-  // console.log(_.keys(p))
   expect(p).to.contain.any.keys(['status',
     'url',
     'fields',
@@ -55,6 +54,23 @@ const isInstallation = function(p: ZenefitsPlatform.Installation) {
 describe("Platform API", function() {
   this.timeout(6000);
   after(hookAfter);
+
+  describe("Error Recovery", function() {
+    it.only("should recover from a bad access token", function(done: any) {
+      client.access_token = "foo"
+      client.installations(function(err: any, resp: ZenefitsPlatform.Installation[]) {
+        expect(err).not.exist;
+        expect(resp).to.be.instanceof(Array);
+
+        _.forEach(resp, function(r: any) {
+          isInstallation(r);
+        });
+
+        done();
+      });
+    });
+  })
+  })
 
   describe("#Get Company Installations", function() {
     it("should get information about the installations for companies who have added your application", function(done: any) {

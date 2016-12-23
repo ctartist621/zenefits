@@ -11,11 +11,10 @@ import chai = require("chai");
 const expect = chai.expect;
 import { Zenefits } from "../index";
 
-let client = new Zenefits();
-
 if (process.env.CIRCLECI) {
+  let client = new Zenefits();
 } else {
-  client.bearerKey = require("./testCreds.json").bearerKey;
+  let client = new Zenefits(require("./testCreds.json"));
 }
 
 import nock = require("nock");

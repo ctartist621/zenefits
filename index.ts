@@ -9,15 +9,21 @@ import async = require("async");
 import needle = require("needle");
 
 export default class Zenefits {
-  bearerKey: string;
+  access_token: string;
+  refresh_token: string;
+  client_id: string;
+  client_secret: string;
   urlBase: string;
   platformBaseUrl: string;
   coreBaseUrl: string;
   installId: string;
   set: any;
 
-  constructor(bearerKey?: string) {
-    this.bearerKey = bearerKey;
+  constructor(opts: any) {
+    this.access_token = opts.access_token;
+    this.refresh_token = opts.refresh_token;
+    this.client_id = opts.client_id;
+    this.client_secret = opts.client_secret;
     this.platformBaseUrl = "https://api.zenefits.com/platform";
     this.coreBaseUrl = "https://api.zenefits.com/core";
   }
@@ -25,7 +31,7 @@ export default class Zenefits {
   _request(method: string, url: string, data:any, cb: any) {
     let options = {
       headers: {
-        Authorization: `Bearer ${this.bearerKey}`,
+        Authorization: `Bearer ${this.access_token}`,
         "Content-Type": "application/json"
       },
       json: method === 'post' ? true : false
@@ -37,22 +43,44 @@ export default class Zenefits {
       delete options.headers["Content-Type"];
     }
 
-    needle.request(method, url, data, options, function(err: any, resp: any, body: any) {
+    const handleError = function(err: any, resp: any, body, cb: any) {
+      err = {
+        code: resp && resp.statusCode,
+        message: resp && resp.statusMessage,
+        url: url,
+        err: err || (body && body.error)
+      };
+      cb(err);
+    }
+
+    const renewToken = () => {
+      needle.post("https://secure.zenefits.com/oauth2/token/", `grant_type=refresh_token&refresh_token=${this.refresh_token}&client_id=${this.client_id}&client_secret=${this.client_secret}`, {}, (err, resp, body) =>{
+        if(err) {
+          cb(err)
+        }
+        this.access_token = body.access_token;
+        this.refresh_token = body.refresh_token;
+        console.log(this)
+        console.log(body)
+        this._request(method, url, data, cb);
+      })
+    }
+
+    needle.request(method, url, data, options, (err: any, resp: any, body: any) => {
       let ret = {};
-      if (body && body.data.data) {
+      if(resp && resp.statusCode === 401) {
+        renewToken();
+      } else if (resp && resp.statusCode >= 400) {
+        handleError(err, resp, body, cb)
+      } else if (body && body.data.data) {
           ret = body.data.data;
+          cb(err, ret)
       } else if (body && body.data) {
           ret = body.data;
-      } else if (resp && resp.statusCode < 400) {
+          cb(err, ret)
       } else {
-        err = {
-          code: resp && resp.statusCode,
-          message: resp && resp.statusMessage,
-          url: url,
-          err: err || (body && body.error)
-        };
+        handleError(err, resp, body, cb)
       }
-      cb(err, ret);
     });
 
   }
