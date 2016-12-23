@@ -13,12 +13,13 @@ import chai = require("chai");
 const expect = chai.expect;
 import { Zenefits } from "../index";
 
+let client = new Zenefits(require("./testCreds.json"));
 
-if (process.env.CIRCLECI) {
-  let client = new Zenefits();
-} else {
-  let client = new Zenefits(require("./testCreds.json"));
-}
+// if (process.env.CIRCLECI) {
+
+// } else {
+//   client = new Zenefits(require("./testCreds.json"));
+// }
 
 import nock = require("nock");
 
@@ -31,7 +32,7 @@ import nock = require("nock");
 let nockBack = require("nock").back;
 
 nockBack.fixtures = __dirname + "/nockFixtures";
-nockBack.setMode("record");
+nockBack.setMode("wild");
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -56,23 +57,22 @@ describe("Platform API", function() {
   after(hookAfter);
 
   describe("Error Recovery", function() {
-    it.only("should recover from a bad access token", function(done: any) {
-      client.access_token = "foo"
+    it.skip("should recover from a bad access token", function(done: any) {
+      client.access_token = "foo";
       client.installations(function(err: any, resp: any) {
         expect(err).not.exist;
         expect(resp.data).to.be.instanceof(Array);
 
-        console.log(err, resp)
+        console.log(err, resp);
 
-        _.forEach(resp.data), function(r: any) {
+        _.forEach(resp.data, function(r: any) {
           isInstallation(r);
         });
 
         done();
       });
     });
-  })
-  })
+  });
 
   describe("#Get Company Installations", function() {
     it("should get information about the installations for companies who have added your application", function(done: any) {
@@ -81,7 +81,7 @@ describe("Platform API", function() {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
 
-          _.forEach(resp.data), function(r: any) {
+          _.forEach(resp.data, function(r: any) {
             isInstallation(r);
           });
 
@@ -95,18 +95,18 @@ describe("Platform API", function() {
 
   describe("#Set Installation Status", function() {
     nockBack.setMode("wild");
-    it("should set installation status to 'ok'", function(done: any) {
+    it.only("should set installation status to 'ok'", function(done: any) {
 
       async.auto({
         setToOk: function(autoCallback: any) {
           nockBack("SetCompanyInstallationStatusOk.json", function(nockDone: any) {
-              client.setInstallationStatusOk(function(err: any, resp: any) {
-                  expect(err).to.be.null;
-                  expect(resp.data).to.be.empty;
+            client.setInstallationStatusOk(function(err: any, resp: any) {
+              expect(err).to.not.exist;
+              expect(resp.data).to.be.empty;
 
-                  nockDone();
-                  autoCallback(err);
-              });
+              nockDone();
+              autoCallback(err);
+            });
           });
         },
         checkOk: ['setToOk', function(results: any, autoCallback: any) {
@@ -115,7 +115,7 @@ describe("Platform API", function() {
               expect(err).not.exist;
               expect(resp.data).to.be.instanceof(Array);
 
-              _.forEach(resp.data), function(r: any) {
+              _.forEach(resp.data, function(r: any) {
                 expect(r.status).to.be.equal('ok');
               });
               nockDone();
@@ -125,8 +125,7 @@ describe("Platform API", function() {
             });
           });
         }]
-      }, done)
-    });
+    }, Infinity, done);
 
     it("should set installation status to 'not_enrolled'", function(done: any) {
       this.timeout(6000);
@@ -135,7 +134,7 @@ describe("Platform API", function() {
         setToNotEnrolled: function(autoCallback: any) {
           nockBack("SetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
             client.setInstallationStatusNotEnrolled(function(err: any, resp: any) {
-              expect(err).to.be.null;
+              expect(err).to.not.exist;
               expect(resp.data).to.be.empty;
 
               nockDone();
@@ -149,7 +148,7 @@ describe("Platform API", function() {
               expect(err).not.exist;
               expect(resp.data).to.be.instanceof(Array);
 
-              _.forEach(resp.data), function(r: any) {
+              _.forEach(resp.data, function(r: any) {
                 expect(r.status).to.be.equal('not_enrolled');
               });
               nockDone();
@@ -157,7 +156,7 @@ describe("Platform API", function() {
               });
           });
         }]
-      }, done)
+      }, Infinity, done)
     });
   });
 });

@@ -66,7 +66,6 @@ export default class Zenefits {
     }
 
     const handleData = (body: any, cb: any) => {
-      console.log('handleData')
       let ret = {
         credentials: {
           access_token: this.access_token,
@@ -84,7 +83,9 @@ export default class Zenefits {
         handleError(err, resp, body, cb)
       } else if (body && body.data) {
         handleData(body, cb)
-      } else {
+      } else if (resp && resp.statusCode == 204) {
+        handleData({ data: {}}, cb)
+      }else {
         handleError(err, resp, body, cb)
       }
     });
@@ -196,12 +197,13 @@ export default class Zenefits {
       if (this.installId) {
           this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
       } else {
-          this.installations((err: any, installations: ZenefitsPlatform.Installation[]) => {
+          this.installations((err: any, installations: any) => {
               if (err) {
                   cb(err);
               } else {
-                  this.installId = _.head(installations).id;
+                  this.installId = _.head(installations.data).id;
                   this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
+
               }
           });
       }
@@ -210,11 +212,11 @@ export default class Zenefits {
       if (this.installId) {
           this.platform('post', 'installationStatus', this.installId, { status: "not_enrolled" }, cb);
       } else {
-          this.installations((err: any, installations: ZenefitsPlatform.Installation[]) => {
+          this.installations((err: any, installations: any) => {
               if (err) {
                   cb(err);
               } else {
-                  this.installId = _.head(installations).id;
+                  this.installId = _.head(installations.data).id;
                   this.platform('post', 'installationStatus', this.installId, { status: "not_enrolled" }, cb);
               }
           });
