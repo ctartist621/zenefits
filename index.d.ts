@@ -168,6 +168,11 @@ declare namespace ZenefitsCore {
   // }
 }
 
+interface Response {
+  credentials: any;
+  data: any;
+}
+
 declare namespace ZenefitsPlatform {
   interface Installation {
     url: string,

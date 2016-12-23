@@ -55,29 +55,35 @@ export default class Zenefits {
 
     const renewToken = () => {
       needle.post("https://secure.zenefits.com/oauth2/token/", `grant_type=refresh_token&refresh_token=${this.refresh_token}&client_id=${this.client_id}&client_secret=${this.client_secret}`, {}, (err, resp, body) =>{
-        if(err) {
-          cb(err)
+        if(err || body.error) {
+          cb(err || body.error)
+        } else {
+          this.access_token = body.access_token;
+          this.refresh_token = body.refresh_token;
+          this._request(method, url, data, cb);
         }
-        this.access_token = body.access_token;
-        this.refresh_token = body.refresh_token;
-        console.log(this)
-        console.log(body)
-        this._request(method, url, data, cb);
       })
     }
 
+    const handleData = (body: any, cb: any) => {
+      console.log('handleData')
+      let ret = {
+        credentials: {
+          access_token: this.access_token,
+          refresh_token: this.refresh_token
+        },
+        data: body.data.data ? body.data.data : body.data
+      };
+      cb(undefined, ret)
+    }
+
     needle.request(method, url, data, options, (err: any, resp: any, body: any) => {
-      let ret = {};
       if(resp && resp.statusCode === 401) {
         renewToken();
       } else if (resp && resp.statusCode >= 400) {
         handleError(err, resp, body, cb)
-      } else if (body && body.data.data) {
-          ret = body.data.data;
-          cb(err, ret)
       } else if (body && body.data) {
-          ret = body.data;
-          cb(err, ret)
+        handleData(body, cb)
       } else {
         handleError(err, resp, body, cb)
       }

@@ -58,11 +58,13 @@ describe("Platform API", function() {
   describe("Error Recovery", function() {
     it.only("should recover from a bad access token", function(done: any) {
       client.access_token = "foo"
-      client.installations(function(err: any, resp: ZenefitsPlatform.Installation[]) {
+      client.installations(function(err: any, resp: any) {
         expect(err).not.exist;
-        expect(resp).to.be.instanceof(Array);
+        expect(resp.data).to.be.instanceof(Array);
 
-        _.forEach(resp, function(r: any) {
+        console.log(err, resp)
+
+        _.forEach(resp.data), function(r: any) {
           isInstallation(r);
         });
 
@@ -75,11 +77,11 @@ describe("Platform API", function() {
   describe("#Get Company Installations", function() {
     it("should get information about the installations for companies who have added your application", function(done: any) {
       nockBack("CompanyInstallations.json", function(nockDone: any) {
-        client.installations(function(err: any, resp: ZenefitsPlatform.Installation[]) {
+        client.installations(function(err: any, resp: any) {
           expect(err).not.exist;
-          expect(resp).to.be.instanceof(Array);
+          expect(resp.data).to.be.instanceof(Array);
 
-          _.forEach(resp, function(r: any) {
+          _.forEach(resp.data), function(r: any) {
             isInstallation(r);
           });
 
@@ -100,7 +102,7 @@ describe("Platform API", function() {
           nockBack("SetCompanyInstallationStatusOk.json", function(nockDone: any) {
               client.setInstallationStatusOk(function(err: any, resp: any) {
                   expect(err).to.be.null;
-                  expect(resp).to.be.empty;
+                  expect(resp.data).to.be.empty;
 
                   nockDone();
                   autoCallback(err);
@@ -109,11 +111,11 @@ describe("Platform API", function() {
         },
         checkOk: ['setToOk', function(results: any, autoCallback: any) {
           nockBack("PostSetCompanyInstallationStatusOk.json", function(nockDone: any) {
-            client.installations(function(err: any, resp: ZenefitsPlatform.Installation[]) {
+            client.installations(function(err: any, resp: any) {
               expect(err).not.exist;
-              expect(resp).to.be.instanceof(Array);
+              expect(resp.data).to.be.instanceof(Array);
 
-              _.forEach(resp, function(r: any) {
+              _.forEach(resp.data), function(r: any) {
                 expect(r.status).to.be.equal('ok');
               });
               nockDone();
@@ -134,7 +136,7 @@ describe("Platform API", function() {
           nockBack("SetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
             client.setInstallationStatusNotEnrolled(function(err: any, resp: any) {
               expect(err).to.be.null;
-              expect(resp).to.be.empty;
+              expect(resp.data).to.be.empty;
 
               nockDone();
               autoCallback(err);
@@ -143,11 +145,11 @@ describe("Platform API", function() {
         },
         checkNotEnrolled: ['setToNotEnrolled', function(results: any, autoCallback: any) {
           nockBack("PostSetCompanyInstallationStatusNotEnrolled.json", function(nockDone: any) {
-            client.installations(function(err: any, resp: ZenefitsPlatform.Installation[]) {
+            client.installations(function(err: any, resp: any) {
               expect(err).not.exist;
-              expect(resp).to.be.instanceof(Array);
+              expect(resp.data).to.be.instanceof(Array);
 
-              _.forEach(resp, function(r: any) {
+              _.forEach(resp.data), function(r: any) {
                 expect(r.status).to.be.equal('not_enrolled');
               });
               nockDone();
