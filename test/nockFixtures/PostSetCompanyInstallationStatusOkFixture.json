@@ -1,0 +1,79 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "get",
+        "path": "/platform/company_installs/",
+        "body": "",
+        "status": 200,
+        "response": {
+            "status": 200,
+            "object": "/meta/response",
+            "data": {
+                "url": "https://api.zenefits.com/platform/company_installs",
+                "next_url": null,
+                "object": "/meta/list",
+                "data": [
+                    {
+                        "status": "ok",
+                        "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/company_installs",
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "person_subscriptions": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217/person_subscriptions",
+                            "object": "/meta/ref/list",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "id": "6053217"
+                    }
+                ]
+            },
+            "error": null
+        },
+        "rawHeaders": [
+            "Date",
+            "Tue, 03 Jan 2017 22:07:48 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "Zenefits-Version",
+            "2015-12-15",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Tue, 03 Jan 2017 22:07:46 GMT",
+            "Server",
+            ""
+        ]
+    }
+]

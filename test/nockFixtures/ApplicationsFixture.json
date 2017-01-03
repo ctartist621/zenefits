@@ -2,38 +2,22 @@
     {
         "scope": "https://api.zenefits.com:443",
         "method": "get",
-        "path": "/platform/company_installs/",
+        "path": "/platform/applications/",
         "body": "",
         "status": 200,
         "response": {
             "status": 200,
             "object": "/meta/response",
             "data": {
-                "url": "https://api.zenefits.com/platform/company_installs",
+                "url": "https://api.zenefits.com/platform/applications",
                 "next_url": null,
                 "object": "/meta/list",
                 "data": [
                     {
-                        "status": "not_enrolled",
-                        "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                        "url": "https://api.zenefits.com/platform/applications/90.com.civic",
                         "fields": {},
-                        "company": {
-                            "url": "https://api.zenefits.com/core/companies/123730",
-                            "object": "/meta/ref/detail",
-                            "ref_object": "/core/companies"
-                        },
-                        "object": "/platform/company_installs",
-                        "application": {
-                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
-                            "object": "/meta/ref/detail",
-                            "ref_object": "/platform/applications"
-                        },
-                        "person_subscriptions": {
-                            "url": "https://api.zenefits.com/platform/company_installs/6053217/person_subscriptions",
-                            "object": "/meta/ref/list",
-                            "ref_object": "/platform/person_subscriptions"
-                        },
-                        "id": "6053217"
+                        "object": "/platform/applications",
+                        "id": "90.com.civic"
                     }
                 ]
             },
@@ -41,7 +25,7 @@
         },
         "rawHeaders": [
             "Date",
-            "Thu, 22 Dec 2016 22:49:14 GMT",
+            "Tue, 03 Jan 2017 22:06:01 GMT",
             "Content-Type",
             "application/json; charset=utf-8",
             "Transfer-Encoding",
@@ -71,7 +55,7 @@
             "Strict-Transport-Security",
             "max-age=31536000; includeSubDomains",
             "Expires",
-            "Thu, 22 Dec 2016 22:49:13 GMT",
+            "Tue, 03 Jan 2017 22:05:59 GMT",
             "Server",
             ""
         ]

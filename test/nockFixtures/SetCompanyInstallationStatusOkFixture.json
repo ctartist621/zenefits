@@ -14,7 +14,7 @@
                 "object": "/meta/list",
                 "data": [
                     {
-                        "status": "ok",
+                        "status": "not_enrolled",
                         "url": "https://api.zenefits.com/platform/company_installs/6053217",
                         "fields": {},
                         "company": {
@@ -41,7 +41,7 @@
         },
         "rawHeaders": [
             "Date",
-            "Fri, 23 Dec 2016 15:29:10 GMT",
+            "Tue, 03 Jan 2017 22:07:46 GMT",
             "Content-Type",
             "application/json; charset=utf-8",
             "Transfer-Encoding",
@@ -71,7 +71,7 @@
             "Strict-Transport-Security",
             "max-age=31536000; includeSubDomains",
             "Expires",
-            "Fri, 23 Dec 2016 15:29:09 GMT",
+            "Tue, 03 Jan 2017 22:07:44 GMT",
             "Server",
             ""
         ]
@@ -87,7 +87,7 @@
         "response": "",
         "rawHeaders": [
             "Date",
-            "Fri, 23 Dec 2016 15:29:10 GMT",
+            "Tue, 03 Jan 2017 22:07:47 GMT",
             "Content-Type",
             "text/html; charset=utf-8",
             "Content-Length",
@@ -111,7 +111,7 @@
             "Strict-Transport-Security",
             "max-age=31536000; includeSubDomains",
             "Expires",
-            "Fri, 23 Dec 2016 15:29:10 GMT",
+            "Tue, 03 Jan 2017 22:07:45 GMT",
             "Server",
             ""
         ]

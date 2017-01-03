@@ -41,7 +41,7 @@
         },
         "rawHeaders": [
             "Date",
-            "Fri, 23 Dec 2016 16:00:01 GMT",
+            "Tue, 03 Jan 2017 22:06:05 GMT",
             "Content-Type",
             "application/json; charset=utf-8",
             "Transfer-Encoding",
@@ -71,7 +71,7 @@
             "Strict-Transport-Security",
             "max-age=31536000; includeSubDomains",
             "Expires",
-            "Fri, 23 Dec 2016 16:00:00 GMT",
+            "Tue, 03 Jan 2017 22:06:03 GMT",
             "Server",
             ""
         ]
