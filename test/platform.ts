@@ -31,8 +31,10 @@ import nock = require("nock");
 
 let nockBack = require("nock").back;
 
-nockBack.fixtures = __dirname + "/nockFixtures";
-nockBack.setMode("record");
+const hookBefore = function() {
+  nockBack.fixtures = __dirname + "/nockFixtures";
+  nockBack.setMode("record");
+}
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -62,8 +64,6 @@ describe("Platform API", function() {
       client.installations(function(err: any, resp: any) {
         expect(err).not.exist;
         expect(resp.data).to.be.instanceof(Array);
-
-        console.log(err, resp);
 
         _.forEach(resp.data, function(r: any) {
           isInstallation(r);

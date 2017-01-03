@@ -29,8 +29,10 @@ import nock = require("nock");
 
 let nockBack = require("nock").back;
 
-nockBack.fixtures = __dirname + "/nockFixtures";
-nockBack.setMode("record");
+const hookBefore = function() {
+  nockBack.fixtures = __dirname + "/nockFixtures";
+  nockBack.setMode("record");
+}
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
@@ -161,6 +163,7 @@ const isAuthedUser = function(p: any) {
 
 describe("Core API", function() {
   this.timeout(6000);
+  before(hookBefore);
   after(hookAfter);
 
   describe("#Companies", function() {
@@ -184,7 +187,7 @@ describe("Core API", function() {
       nockBack("CompaniesFixture.json", function(nockDone1: any) {
         client.companies((err: any, companies: any) => {
           nockBack("CompanyFixture.json", function(nockDone2: any) {
-            client.company((<ZenefitsCore.Company>_.head(companies)).id, (err: any, resp: any) => {
+            client.company((<ZenefitsCore.Company>_.head(companies.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isCompany(resp.data);
               nockDone1();
@@ -249,11 +252,12 @@ describe("Core API", function() {
     it("should get a single employment", function(done: any) {
       nockBack("EmploymentsFixture.json", function(nockDone1: any) {
         client.employments((err: any, employments: any) => {
+          nockDone1();
           nockBack("EmploymentFixture.json", function(nockDone2: any) {
-              client.employment((<ZenefitsCore.Employment>_.head(employments)).id, (err: any, resp: any) => {
+            expect(err).not.exist;
+            client.employment((<ZenefitsCore.Employment>_.head(employments.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isEmployment(resp.data);
-              nockDone1();
               nockDone2();
               done();
             });
@@ -283,7 +287,7 @@ describe("Core API", function() {
       nockBack("CompanyBankAccountsFixture.json", function(nockDone1: any) {
         client.companyBankAccounts((err: any, accounts: any) => {
           nockBack("CompanyBankAccountFixture.json", function(nockDone2: any) {
-              client.companyBankAccount((<ZenefitsCore.CompanyBankAccount>_.head(accounts)).id, (err: any, resp: any) => {
+            client.companyBankAccount((<ZenefitsCore.CompanyBankAccount>_.head(accounts.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isCompanyBankAccount(resp.data);
               nockDone1();
@@ -316,7 +320,7 @@ describe("Core API", function() {
       nockBack("EmployeeBankAccountsFixture.json", function(nockDone1: any) {
         client.employeeBankAccounts((err: any, accounts: any) => {
           nockBack("EmployeeBankAccountFixture.json", function(nockDone2: any) {
-              client.employeeBankAccount((<ZenefitsCore.EmployeeBankAccount>_.head(accounts)).id, (err: any, resp: any) => {
+            client.employeeBankAccount((<ZenefitsCore.EmployeeBankAccount>_.head(accounts.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isEmployeeBankAccount(resp.data);
               nockDone1();
@@ -349,7 +353,7 @@ describe("Core API", function() {
       nockBack("DepartmentsFixture.json", function(nockDone1: any) {
         client.departments((err: any, departments: any) => {
           nockBack("DepartmentFixture.json", function(nockDone2: any) {
-              client.department((<ZenefitsCore.Department>_.head(departments)).id, (err: any, resp: any) => {
+            client.department((<ZenefitsCore.Department>_.head(departments.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isDepartment(resp.data);
               nockDone1();
@@ -382,7 +386,7 @@ describe("Core API", function() {
       nockBack("LocationsFixture.json", function(nockDone1: any) {
         client.locations((err: any, locations: any) => {
           nockBack("LocationFixture.json", function(nockDone2: any) {
-              client.location((<ZenefitsCore.Location>_.head(locations)).id, (err: any, resp: any) => {
+            client.location((<ZenefitsCore.Location>_.head(locations.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isLocation(resp.data);
               nockDone1();

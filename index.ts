@@ -79,7 +79,6 @@ export default class Zenefits {
       };
       cb(undefined, ret)
     }
-
     needle.request(method, url, data, options, (err: any, resp: any, body: any) => {
       if(resp && resp.statusCode === 401) {
         renewToken();

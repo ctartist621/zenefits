@@ -11,12 +11,12 @@
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-3.4.34.tgz#d5335792823bb09cddd5e38c3d211b709183854d"
 
 "@types/lodash@^4.14.43":
-  version "4.14.44"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.44.tgz#04585ff0b80d5e434a5f86f15e7964be4f775cba"
+  version "4.14.45"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.45.tgz#db20238f23fa195d6fb8f9ff7988e8651fc8c302"
 
 "@types/mocha@^2.2.33":
-  version "2.2.34"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.34.tgz#398e8a265f1db1e5f8c6e520064a74cbef84cbdc"
+  version "2.2.35"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.35.tgz#dd3150b62a6de73368109308515c3aa86f81f1ec"
 
 "@types/needle@^0.7.29":
   version "0.7.29"
@@ -31,8 +31,8 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "6.0.53"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.53.tgz#8c300ca8ba51f80f98f3525b932ff47c6efd6be1"
+  version "6.0.56"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.56.tgz#12bc7fff825e72807f55dcbce17e9db6177713dd"
 
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
@@ -326,8 +326,8 @@ debug@2.2.0, debug@~2.2.0:
     ms "0.7.1"
 
 debug@^2.1.2, debug@^2.2.0:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.5.1.tgz#9107bb4a506052ec2a02314bc606313ed2b921c1"
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
   dependencies:
     ms "0.7.2"
 
@@ -464,8 +464,8 @@ extsprintf@1.0.2:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
 fast-levenshtein@~2.0.4:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.5.tgz#bd33145744519ab1c36c3ee9f31f08e9079b67f2"
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
 filename-regex@^2.0.0:
   version "2.0.0"
@@ -1008,8 +1008,8 @@ lodash@^3.10.0:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
 lodash@^4.14.0, lodash@^4.17.2:
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 lodash@~4.9.0:
   version "4.9.0"
@@ -1118,8 +1118,8 @@ nan@^2.3.0:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.0.tgz#aa8f1e34531d807e9e27755b234b4a6ec0c152a8"
 
 needle@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/needle/-/needle-1.4.2.tgz#dffba156b7b4fbbd2cd25a59ff1c296326d6e94f"
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/needle/-/needle-1.4.3.tgz#7077cf8752172e2fcec4722ce2766fc3c5ded873"
   dependencies:
     debug "^2.1.2"
     iconv-lite "^0.4.4"
