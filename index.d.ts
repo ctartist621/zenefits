@@ -189,4 +189,13 @@ declare namespace ZenefitsPlatform {
     object: string,
     id: string
   }
+  interface PersonSubscription {
+    fields: any,
+    company_install: ZenefitsCore.Reference,
+    person: ZenefitsCore.Reference,
+    flows: ZenefitsCore.Reference,
+    status: ZenefitsCore.Reference,
+    object: string,
+    id: string
+  }
 }

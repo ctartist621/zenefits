@@ -224,6 +224,14 @@ export default class Zenefits {
     this.platform('get', 'company_installs', installId, undefined, cb);
   }
 
+  personSubscriptions(cb: any) {
+    this.platform('get', 'person_subscriptions', undefined, undefined, cb);
+  }
+
+  personSubscription(subscriptionId: string, cb: any) {
+    this.platform('get', 'person_subscriptions', subscriptionId, undefined, cb);
+  }
+
   setInstallationStatusOk(cb: any) {
       if (this.installId) {
           this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);

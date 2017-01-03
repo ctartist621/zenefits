@@ -63,6 +63,18 @@ const isApplication = function(p: ZenefitsPlatform.Application) {
   ]);
 };
 
+const isPersonSubscription = function(p: ZenefitsPlatform.PersonSubscription) {
+  expect(p).to.contain.any.keys([
+    'fields',
+    'company_install',
+    'person',
+    'flows',
+    'status',
+    'object',
+    'id'
+  ]);
+};
+
 describe.only("Platform API", function() {
   this.timeout(6000);
   before(hookBefore);
@@ -250,4 +262,38 @@ describe.only("Platform API", function() {
       }, Infinity, done)
     });
   });
+
+  describe("Get Person Subscriptions", function() {
+    it("should get information about the subscriptions for people in the company where your integration was added", function(done: any) {
+      nockBack("PersonSubscriptionsFixture.json", function(nockDone: any) {
+        client.personSubscriptions(function(err: any, resp: any) {
+          expect(err).not.exist;
+          expect(resp.data).to.be.instanceof(Array);
+
+          _.forEach(resp.data, function(r: any) {
+            isPersonSubscription(r);
+          });
+
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should get a single subscription", function(done: any) {
+      nockBack("PersonSubscriptionsFixture.json", function(nockDone1: any) {
+        client.personSubscriptions((err: any, subscriptions: any) => {
+          nockDone1();
+          nockBack("PersonSubscriptionFixture.json", function(nockDone2: any) {
+            client.personSubscription((<ZenefitsPlatform.PersonSubscription>_.head(subscriptions.data)).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              isPersonSubscription(resp.data);
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  })
 });
