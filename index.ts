@@ -16,6 +16,7 @@ export default class Zenefits {
   urlBase: string;
   platformBaseUrl: string;
   coreBaseUrl: string;
+  applicationId: string;
   installId: string;
   set: any;
   credentialsRefreshed: boolean;
@@ -108,6 +109,10 @@ export default class Zenefits {
   platform(method: string, type: string, id: string, data: any, cb?: any) {
     let url = `${this.platformBaseUrl}/${type}/`;
     switch (type) {
+      case "fields_changes":
+        url = `${this.platformBaseUrl}/applications/${id}/fields_changes/`;
+        break;
+
       case "installationStatus":
         url = `${this.platformBaseUrl}/company_installs/${id}/status_changes/`;
         break;
@@ -188,6 +193,29 @@ export default class Zenefits {
     this.core("me", undefined, cb)
   }
 
+  applications(cb: any) {
+    this.platform('get', 'applications', undefined, undefined, cb);
+  }
+
+  application(applicationId: string, cb: any) {
+    this.platform('get', 'applications', applicationId, undefined, cb);
+  }
+
+  setApplicationCustomFields(fields: any, cb: any) {
+    if (this.applicationId) {
+      this.platform('post', 'fields_changes', this.applicationId, fields, cb);
+    } else {
+      this.applications((err: any, applications: any) => {
+        if (err) {
+          cb(err);
+        } else {
+          this.installId = (<ZenefitsPlatform.Application>_.head(applications.data)).id;
+          this.platform('post', 'fields_changes', this.applicationId, fields, cb);
+        }
+      });
+    }
+  }
+
   installations(cb: any) {
     this.platform('get', 'company_installs', undefined, undefined, cb);
   }
@@ -206,7 +234,6 @@ export default class Zenefits {
               } else {
                   this.installId = (<ZenefitsPlatform.Installation>_.head(installations.data)).id;
                   this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
-
               }
           });
       }

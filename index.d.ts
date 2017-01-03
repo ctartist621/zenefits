@@ -183,4 +183,10 @@ declare namespace ZenefitsPlatform {
     person_subscriptions: ZenefitsCore.Reference,
     id: string
   }
+  interface Application {
+    url: string,
+    fields: any,
+    object: string,
+    id: string
+  }
 }
