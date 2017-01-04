@@ -198,4 +198,15 @@ declare namespace ZenefitsPlatform {
     object: string,
     id: string
   }
+  interface Flow {
+    fields: any,
+    company: ZenefitsCore.Reference,
+    company_install: ZenefitsCore.Reference,
+    application: ZenefitsCore.Reference,
+    person: ZenefitsCore.Reference,
+    person_subscriptions: ZenefitsCore.Reference,
+    type: string,
+    object: string,
+    id: string
+  }
 }

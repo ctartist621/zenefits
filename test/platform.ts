@@ -52,6 +52,7 @@ const isInstallation = function(p: ZenefitsPlatform.Installation) {
     'person_subscriptions',
     'id'
   ]);
+  expect(p.object).to.equal("/platform/company_installs")
 };
 
 const isApplication = function(p: ZenefitsPlatform.Application) {
@@ -61,6 +62,7 @@ const isApplication = function(p: ZenefitsPlatform.Application) {
     'object',
     'id'
   ]);
+  expect(p.object).to.equal("/platform/applications")
 };
 
 const isPersonSubscription = function(p: ZenefitsPlatform.PersonSubscription) {
@@ -73,9 +75,25 @@ const isPersonSubscription = function(p: ZenefitsPlatform.PersonSubscription) {
     'object',
     'id'
   ]);
+  expect(p.object).to.equal("/platform/person_subscriptions")
 };
 
-describe.only("Platform API", function() {
+  const isFlow = function(p: ZenefitsPlatform.Flow) {
+    expect(p).to.contain.any.keys([
+      'fields',
+      'company',
+      'company_install',
+      'application',
+      'person',
+      'person_subscriptions',
+      'type',
+      'object',
+      'id'
+    ]);
+    expect(p.object).to.equal("/platform/flows")
+};
+
+describe("Platform API", function() {
   this.timeout(6000);
   before(hookBefore);
   after(hookAfter);
@@ -296,4 +314,39 @@ describe.only("Platform API", function() {
       });
     });
   })
+
+  describe("Get Flows", function() {
+    it("should get information about the flows (e.g. hiring) completed by people who have added your application", function(done: any) {
+      nockBack("AllFlowsFixture.json", function(nockDone: any) {
+        client.allFlows(function(err: any, resp: any) {
+          expect(err).not.exist;
+          expect(resp.data).to.be.instanceof(Array);
+
+          _.forEach(resp.data, function(r: any) {
+            isFlow(r);
+          });
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should get a single subscription's flows", function(done: any) {
+      nockBack("PersonSubscriptionsFixture.json", function(nockDone1: any) {
+        client.personSubscriptions((err: any, subscriptions: any) => {
+          nockDone1();
+          nockBack("IndividualFlowsFixture.json", function(nockDone2: any) {
+            client.individualFlows((<ZenefitsPlatform.PersonSubscription>_.head(subscriptions.data)).id, (err: any, resp: any) => {
+              expect(err).not.exist;
+              _.forEach(resp.data, function(r: any) {
+                isFlow(r);
+              });
+              nockDone2();
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
 });

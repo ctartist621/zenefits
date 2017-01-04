@@ -116,7 +116,11 @@ export default class Zenefits {
       case "installationStatus":
         url = `${this.platformBaseUrl}/company_installs/${id}/status_changes/`;
         break;
-
+      case "flows":
+        if(id) {
+          url = `${this.platformBaseUrl}/person_subscriptions/${id}/flows/`;
+        }
+        break;
       default:
         if (!_.isUndefined(id)) {
           url += id;
@@ -259,6 +263,14 @@ export default class Zenefits {
               }
           });
       }
+  }
+
+  allFlows(cb: any) {
+    this.platform('get', 'flows', undefined, undefined, cb);
+  }
+
+  individualFlows(personSubscriptionId: any, cb: any) {
+    this.platform('get', 'flows', personSubscriptionId, undefined, cb);
   }
 }
 

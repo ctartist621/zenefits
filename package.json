@@ -1,46 +1,46 @@
 {
-    "name": "zenefits",
-    "version": "0.3.3",
-    "description": "An npm module to interact with the Zenefits API",
-    "main": "index.js",
-    "scripts": {
-        "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
-        "testLocal": "source ~/.nvm/nvm.sh; nvm use; ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
-        "2npm": "publish"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ctartist621/zenefits.git"
-    },
-    "keywords": [
-        "zenefits",
-        "hr"
-    ],
-    "author": "David B Mittelman",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/ctartist621/zenefits/issues"
-    },
-    "homepage": "https://github.com/ctartist621/zenefits#readme",
-    "devDependencies": {
-        "@types/async": "^2.0.36",
-        "@types/chai": "^3.4.34",
-        "@types/lodash": "^4.14.43",
-        "@types/mocha": "^2.2.33",
-        "@types/needle": "^0.7.29",
-        "@types/nock": "^8.2.0",
-        "chai": "^3.5.0",
-        "codacy-coverage": "^2.0.0",
-        "istanbul": "^0.4.5",
-        "mocha": "^3.2.0",
-        "nock": "^9.0.2",
-        "typescript": "^2.1.4"
-    },
-    "dependencies": {
-        "async": "^2.1.4",
-        "global": "^4.3.1",
-        "lodash": "^4.17.2",
-        "needle": "^1.4.2",
-        "nodemon": "^1.11.0"
-    }
+  "name": "zenefits",
+  "version": "0.3.3",
+  "description": "An npm module to interact with the Zenefits API",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
+    "testLocal": "source ~/.nvm/nvm.sh; nvm use; ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly",
+    "2npm": "publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctartist621/zenefits.git"
+  },
+  "keywords": [
+    "zenefits",
+    "hr"
+  ],
+  "author": "David B Mittelman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ctartist621/zenefits/issues"
+  },
+  "homepage": "https://github.com/ctartist621/zenefits#readme",
+  "devDependencies": {
+    "@types/async": "^2.0.36",
+    "@types/chai": "^3.4.34",
+    "@types/lodash": "^4.14.43",
+    "@types/mocha": "^2.2.33",
+    "@types/needle": "^0.7.29",
+    "@types/nock": "^8.2.0",
+    "chai": "^3.5.0",
+    "codacy-coverage": "^2.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.2",
+    "typescript": "^2.1.4"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "global": "^4.3.1",
+    "lodash": "^4.17.2",
+    "needle": "^1.4.2",
+    "nodemon": "^1.11.0"
+  }
 }
