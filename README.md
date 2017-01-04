@@ -2,3 +2,5 @@
 
 # zenefits
 An npm module to interact with the Zenefits API
+
+Currently lacking custom field support, as well as next page support.
