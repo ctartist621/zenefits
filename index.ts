@@ -33,16 +33,16 @@ export default class Zenefits {
     this.coreBaseUrl = "https://api.zenefits.com/core";
   }
 
-  _request(method: string, url: string, data:any, cb: any) {
+  _request(method: string, url: string, data: any, cb: any) {
     let options = {
       headers: {
         Authorization: `Bearer ${this.access_token}`,
         "Content-Type": "application/json"
       },
-      json: method === 'post' ? true : false
+      json: method === "post" ? true : false
     };
 
-    if(method === "post") {
+    if (method === "post") {
       // code...
     } else {
       delete options.headers["Content-Type"];
@@ -59,8 +59,8 @@ export default class Zenefits {
     }
 
     const renewToken = () => {
-      needle.post("https://secure.zenefits.com/oauth2/token/", `grant_type=refresh_token&refresh_token=${this.refresh_token}&client_id=${this.client_id}&client_secret=${this.client_secret}`, {}, (err, resp, body) =>{
-        if(err || body.error) {
+      needle.post("https://secure.zenefits.com/oauth2/token/", `grant_type=refresh_token&refresh_token=${this.refresh_token}&client_id=${this.client_id}&client_secret=${this.client_secret}`, {}, (err, resp, body) => {
+        if (err || body.error) {
           cb(err || body.error)
         } else {
           this.access_token = body.access_token;
@@ -83,13 +83,13 @@ export default class Zenefits {
       cb(undefined, ret)
     }
     needle.request(method, url, data, options, (err: any, resp: any, body: any) => {
-      if(resp && resp.statusCode === 401) {
+      if (resp && resp.statusCode === 401) {
         renewToken();
       } else if (resp && resp.statusCode >= 400) {
         handleError(err, resp, body, cb)
       } else if (body && body.data) {
         handleData(body, cb)
-      } else if (resp && resp.statusCode == 204) {
+      } else if (resp && resp.statusCode === 204) {
         handleData({ data: {}}, cb)
       } else {
         handleError(err, resp, body, cb)
@@ -105,29 +105,29 @@ export default class Zenefits {
       url += id;
     };
 
-    this._request('get', url, undefined, cb)
+    this._request("get", url, undefined, cb)
   }
 
   platform(method: string, type: string, id: string, data: any, cb?: any) {
     let url = `${this.platformBaseUrl}/${type}/`;
     switch (type) {
       case "fields_changes":
-        url = `${this.platformBaseUrl}/applications/${id}/fields_changes/`;
-        break;
+      url = `${this.platformBaseUrl}/applications/${id}/fields_changes/`;
+      break;
 
       case "installationStatus":
-        url = `${this.platformBaseUrl}/company_installs/${id}/status_changes/`;
-        break;
+      url = `${this.platformBaseUrl}/company_installs/${id}/status_changes/`;
+      break;
       case "flows":
-        if(id) {
-          url = `${this.platformBaseUrl}/person_subscriptions/${id}/flows/`;
-        }
-        break;
+      if (id) {
+        url = `${this.platformBaseUrl}/person_subscriptions/${id}/flows/`;
+      }
+      break;
       default:
-        if (!_.isUndefined(id)) {
-          url += id;
-        };
-        break;
+      if (!_.isUndefined(id)) {
+        url += id;
+      };
+      break;
     }
     this._request(method, url, data, cb);
   }
@@ -136,7 +136,7 @@ export default class Zenefits {
     if (error) {
       cb(error);
     } else {
-     cb(error, _.head(response));
+      cb(error, _.head(response));
     }
   }
 
@@ -200,87 +200,88 @@ export default class Zenefits {
   }
 
   applications(cb: any) {
-    this.platform('get', 'applications', undefined, undefined, cb);
+    this.platform("get", "applications", undefined, undefined, cb);
   }
 
   application(applicationId: string, cb: any) {
-    this.platform('get', 'applications', applicationId, undefined, cb);
+    this.platform("get", "applications", applicationId, undefined, cb);
   }
 
   setApplicationCustomFields(fields: any, cb: any) {
     if (this.applicationId) {
-      this.platform('post', 'fields_changes', this.applicationId, fields, cb);
+      this.platform("post", "fields_changes", this.applicationId, fields, cb);
     } else {
       this.applications((err: any, applications: any) => {
         if (err) {
           cb(err);
         } else {
           this.installId = (<ZenefitsPlatform.Application>_.head(applications.data)).id;
-          this.platform('post', 'fields_changes', this.applicationId, fields, cb);
+          this.platform("post", "fields_changes", this.applicationId, fields, cb);
         }
       });
     }
   }
 
   installations(cb: any) {
-    this.platform('get', 'company_installs', undefined, undefined, cb);
+    this.platform("get", "company_installs", undefined, undefined, cb);
   }
 
   installation(installId: string, cb: any) {
-    this.platform('get', 'company_installs', installId, undefined, cb);
+    this.platform("get", "company_installs", installId, undefined, cb);
   }
 
   personSubscriptions(cb: any) {
-    this.platform('get', 'person_subscriptions', undefined, undefined, cb);
+    this.platform("get", "person_subscriptions", undefined, undefined, cb);
   }
 
   personSubscription(subscriptionId: string, cb: any) {
-    this.platform('get', 'person_subscriptions', subscriptionId, undefined, cb);
+    this.platform("get", "person_subscriptions", subscriptionId, undefined, cb);
   }
 
   setInstallationStatusOk(cb: any) {
-      if (this.installId) {
-          this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
-      } else {
-          this.installations((err: any, installations: any) => {
-              if (err) {
-                  cb(err);
-              } else {
-                  this.installId = (<ZenefitsPlatform.Installation>_.head(installations.data)).id;
-                  this.platform('post', 'installationStatus', this.installId, { status: "ok" }, cb);
-              }
-          });
-      }
+    if (this.installId) {
+      this.platform("post", "installationStatus", this.installId, { status: "ok" }, cb);
+    } else {
+      this.installations((err: any, installations: any) => {
+        if (err) {
+          cb(err);
+        } else {
+          this.installId = (<ZenefitsPlatform.Installation>_.head(installations.data)).id;
+          this.platform("post", "installationStatus", this.installId, { status: "ok" }, cb);
+        }
+      });
+    }
   }
+
   setInstallationStatusNotEnrolled(cb: any) {
-      if (this.installId) {
-          this.platform('post', 'installationStatus', this.installId, { status: "not_enrolled" }, cb);
-      } else {
-          this.installations((err: any, installations: any) => {
-              if (err) {
-                  cb(err);
-              } else {
-                  this.installId = (<ZenefitsPlatform.Installation>_.head(installations.data)).id;
-                  this.platform('post', 'installationStatus', this.installId, { status: "not_enrolled" }, cb);
-              }
-          });
-      }
+    if (this.installId) {
+      this.platform("post", "installationStatus", this.installId, { status: "not_enrolled" }, cb);
+    } else {
+      this.installations((err: any, installations: any) => {
+        if (err) {
+          cb(err);
+        } else {
+          this.installId = (<ZenefitsPlatform.Installation>_.head(installations.data)).id;
+          this.platform("post", "installationStatus", this.installId, { status: "not_enrolled" }, cb);
+        }
+      });
+    }
   }
 
   allFlows(cb: any) {
-    this.platform('get', 'flows', undefined, undefined, cb);
+    this.platform("get", "flows", undefined, undefined, cb);
   }
 
   individualFlows(personSubscriptionId: any, cb: any) {
-    this.platform('get', 'flows', personSubscriptionId, undefined, cb);
+    this.platform("get", "flows", personSubscriptionId, undefined, cb);
   }
 
   authenticateEvent(payload: any, headers: any, cb: any) {
-    const hmac = crypto.createHmac('sha256', this.client_secret);
+    const hmac = crypto.createHmac("sha256", this.client_secret);
     hmac.update(JSON.stringify(payload));
-    const result = hmac.digest('hex');
+    const result = hmac.digest("hex");
 
-    if(result === headers.signature) {
+    if (result === headers.signature) {
       cb(undefined, payload)
     } else {
       cb({

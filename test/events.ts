@@ -33,7 +33,7 @@ const hookBefore = function() {
 
   nockBack.fixtures = __dirname + "/nockFixtures";
   nockBack.setMode("record");
-  client.client_secret = require('./sampleData/testEventCreds.json').client_secret;
+  client.client_secret = require("./sampleData/testEventCreds.json").client_secret;
 }
 
 const hookAfter = function() {
@@ -46,8 +46,8 @@ describe("Events", function() {
 
   describe("authentication", function() {
     it("should authenticate an incoming Zenefits event", function(done: any) {
-      const payload = require('./sampleData/testEventPayload.json');
-      const headers = require('./sampleData/testEventHeaders.json');
+      const payload = require("./sampleData/testEventPayload.json");
+      const headers = require("./sampleData/testEventHeaders.json");
       client.authenticateEvent(payload, headers, function(err: any, p: any) {
         expect(err).not.exist;
         expect(p).to.equal(payload)
@@ -56,7 +56,7 @@ describe("Events", function() {
     });
 
     it("should reject an incoming Zenefits event with no signature", function(done: any) {
-      const payload = require('./sampleData/testEventPayload.json');
+      const payload = require("./sampleData/testEventPayload.json");
       const headers = {}
       client.authenticateEvent(payload, headers, function(err: any, p: any) {
         expect(err.error).to.equal("UNAUTHORIZED EVENT")

@@ -45,52 +45,52 @@ const hookAfter = function() {
 };
 
 const isInstallation = function(p: ZenefitsPlatform.Installation) {
-  expect(p).to.contain.any.keys(['status',
-    'url',
-    'fields',
-    'company',
-    'object',
-    'application',
-    'person_subscriptions',
-    'id'
+  expect(p).to.contain.any.keys(["status",
+    "url",
+    "fields",
+    "company",
+    "object",
+    "application",
+    "person_subscriptions",
+    "id"
   ]);
   expect(p.object).to.equal("/platform/company_installs")
 };
 
 const isApplication = function(p: ZenefitsPlatform.Application) {
   expect(p).to.contain.any.keys([
-    'url',
-    'fields',
-    'object',
-    'id'
+    "url",
+    "fields",
+    "object",
+    "id"
   ]);
   expect(p.object).to.equal("/platform/applications")
 };
 
 const isPersonSubscription = function(p: ZenefitsPlatform.PersonSubscription) {
   expect(p).to.contain.any.keys([
-    'fields',
-    'company_install',
-    'person',
-    'flows',
-    'status',
-    'object',
-    'id'
+    "fields",
+    "company_install",
+    "person",
+    "flows",
+    "status",
+    "object",
+    "id"
   ]);
   expect(p.object).to.equal("/platform/person_subscriptions")
 };
 
   const isFlow = function(p: ZenefitsPlatform.Flow) {
     expect(p).to.contain.any.keys([
-      'fields',
-      'company',
-      'company_install',
-      'application',
-      'person',
-      'person_subscriptions',
-      'type',
-      'object',
-      'id'
+      "fields",
+      "company",
+      "company_install",
+      "application",
+      "person",
+      "person_subscriptions",
+      "type",
+      "object",
+      "id"
     ]);
     expect(p.object).to.equal("/platform/flows")
 };
@@ -165,14 +165,14 @@ describe("Platform API", function() {
             });
           });
         },
-        checkField: ['setField', function(results: any, autoCallback: any) {
+        checkField: ["setField", function(results: any, autoCallback: any) {
           nockBack("PostApplicationCustomFieldsFixture.json", function(nockDone: any) {
             client.applications(function(err: any, resp: any) {
               expect(err).not.exist;
               expect(resp.data).to.be.instanceof(Array);
               console.log(resp)
               _.forEach(resp.data, function(r: any) {
-                expect(r.status).to.be.equal('ok');
+                expect(r.status).to.be.equal("ok");
               });
               nockDone();
               autoCallback(err);
@@ -231,14 +231,14 @@ describe("Platform API", function() {
                   });
               });
           },
-          checkOk: ['setToOk', function(results: any, autoCallback: any) {
+          checkOk: ["setToOk", function(results: any, autoCallback: any) {
               nockBack("PostSetCompanyInstallationStatusOkFixture.json", function(nockDone: any) {
                   client.installations(function(err: any, resp: any) {
                       expect(err).not.exist;
                       expect(resp.data).to.be.instanceof(Array);
 
                       _.forEach(resp.data, function(r: any) {
-                          expect(r.status).to.be.equal('ok');
+                          expect(r.status).to.be.equal("ok");
                       });
                       nockDone();
 
@@ -265,14 +265,14 @@ describe("Platform API", function() {
             });
           });
         },
-        checkNotEnrolled: ['setToNotEnrolled', function(results: any, autoCallback: any) {
+        checkNotEnrolled: ["setToNotEnrolled", function(results: any, autoCallback: any) {
           nockBack("PostSetCompanyInstallationStatusNotEnrolledFixture.json", function(nockDone: any) {
             client.installations(function(err: any, resp: any) {
               expect(err).not.exist;
               expect(resp.data).to.be.instanceof(Array);
 
               _.forEach(resp.data, function(r: any) {
-                expect(r.status).to.be.equal('not_enrolled');
+                expect(r.status).to.be.equal("not_enrolled");
               });
               nockDone();
               autoCallback(err);
