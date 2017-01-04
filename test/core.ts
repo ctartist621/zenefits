@@ -24,7 +24,16 @@ let client: any;
 let nockBack = require("nock").back;
 
 const hookBefore = function() {
-  client = new Zenefits(require("./testCreds.json"));
+  if (process.env.CIRCLECI) {
+    client = new Zenefits({
+      access_token: "",
+      refresh_token: "",
+      client_id: "",
+      client_secret: "",
+    })
+  } else {
+    client = new Zenefits(require("./testCreds.json"));
+  }
 
   nockBack.fixtures = __dirname + "/nockFixtures";
   nockBack.setMode("record");

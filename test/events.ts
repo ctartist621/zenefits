@@ -15,18 +15,22 @@ import { Zenefits } from "../index";
 
 let client: Zenefits;
 
-// if (process.env.CIRCLECI) {
-
-// } else {
-//   client = new Zenefits(require("./testCreds.json"));
-// }
-
 import nock = require("nock");
 
 let nockBack = require("nock").back;
 
 const hookBefore = function() {
-  client = new Zenefits(require("./testCreds.json"));
+  if (process.env.CIRCLECI) {
+    client = new Zenefits({
+      access_token: "",
+      refresh_token: "",
+      client_id: "",
+      client_secret: "",
+    })
+  } else {
+    client = new Zenefits(require("./testCreds.json"));
+  }
+
   nockBack.fixtures = __dirname + "/nockFixtures";
   nockBack.setMode("record");
   client.client_secret = require('./sampleData/testEventCreds.json').client_secret;
@@ -35,7 +39,7 @@ const hookBefore = function() {
 const hookAfter = function() {
 }
 
-describe.only("Events", function() {
+describe("Events", function() {
   this.timeout(6000);
   before(hookBefore);
   after(hookAfter);
