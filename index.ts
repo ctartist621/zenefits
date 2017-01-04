@@ -1,12 +1,14 @@
 /// <reference types="lodash" />
 /// <reference types="async" />
 /// <reference types="needle" />
+/// <reference types="node" />
 /// <reference path="./index.d.ts" />
 
 
 import _ = require("lodash");
 import async = require("async");
 import needle = require("needle");
+import crypto = require("crypto");
 
 export default class Zenefits {
   access_token: string;
@@ -51,7 +53,7 @@ export default class Zenefits {
         code: resp && resp.statusCode,
         message: resp && resp.statusMessage,
         url: url,
-        err: err || (body && body.error)
+        error: err || (body && body.error)
       };
       cb(err);
     }
@@ -271,6 +273,23 @@ export default class Zenefits {
 
   individualFlows(personSubscriptionId: any, cb: any) {
     this.platform('get', 'flows', personSubscriptionId, undefined, cb);
+  }
+
+  authenticateEvent(payload: any, headers: any, cb: any) {
+    const hmac = crypto.createHmac('sha256', this.client_secret);
+    hmac.update(JSON.stringify(payload));
+    const result = hmac.digest('hex');
+
+    if(result === headers.signature) {
+      cb(undefined, payload)
+    } else {
+      cb({
+        code: 301,
+        signature: headers.signature,
+        event: payload,
+        error: "UNAUTHORIZED EVENT"
+      })
+    }
   }
 }
 

@@ -13,7 +13,7 @@ import chai = require("chai");
 const expect = chai.expect;
 import { Zenefits } from "../index";
 
-let client = new Zenefits(require("./testCreds.json"));
+let client: any;
 
 // if (process.env.CIRCLECI) {
 
@@ -23,23 +23,16 @@ let client = new Zenefits(require("./testCreds.json"));
 
 import nock = require("nock");
 
-// nock.recorder.rec({
-//   dont_print: true,
-//   enable_reqheaders_recording: true,
-//   output_objects: true
-// });
-
 let nockBack = require("nock").back;
 
 const hookBefore = function() {
+  client = new Zenefits(require("./testCreds.json"));
   nockBack.fixtures = __dirname + "/nockFixtures";
   nockBack.setMode("record");
 }
 
 const hookAfter = function() {
   // console.log("HOOKS - AFTER");
-  // console.log(__dirname + "/nockFixtures/fixtures.js");
-  // fs.appendFileSync(__dirname + "/nockFixtures/fixtures.js", nock.recorder.play());
 };
 
 const isInstallation = function(p: ZenefitsPlatform.Installation) {

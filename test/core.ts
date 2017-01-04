@@ -8,10 +8,12 @@ import _ = require("lodash");
 import fs = require("fs");
 import path = require("path");
 import chai = require("chai");
-const expect = chai.expect;
 import { Zenefits } from "../index";
+import nock = require("nock");
 
-let client = new Zenefits(require("./testCreds.json"));
+const expect = chai.expect;
+
+let client: any;
 
 // if (process.env.CIRCLECI) {
 //   let client = new Zenefits();
@@ -19,25 +21,16 @@ let client = new Zenefits(require("./testCreds.json"));
 //   let client = new Zenefits(require("./testCreds.json"));
 // }
 
-import nock = require("nock");
-
-// nock.recorder.rec({
-//   dont_print: true,
-//   enable_reqheaders_recording: true,
-//   output_objects: true
-// });
-
 let nockBack = require("nock").back;
 
 const hookBefore = function() {
+  client = new Zenefits(require("./testCreds.json"));
+
   nockBack.fixtures = __dirname + "/nockFixtures";
   nockBack.setMode("record");
 }
 
 const hookAfter = function() {
-  // console.log("HOOKS - AFTER");
-  // console.log(__dirname + "/nockFixtures/fixtures.js");
-  // fs.appendFileSync(__dirname + "/nockFixtures/fixtures.js", nock.recorder.play());
 };
 
 const isCompany = function(c: any) {
@@ -220,7 +213,7 @@ describe("Core API", function() {
       nockBack("PeopleFixture.json", function(nockDone1: any) {
         client.people((err: any, people: any) => {
           nockBack("PersonFixture.json", function(nockDone2: any) {
-              client.person((<ZenefitsCore.Person>_.head(people.data)).id, (err: any, resp: any) => {
+            client.person((<ZenefitsCore.Person>_.head(people.data)).id, (err: any, resp: any) => {
               expect(err).not.exist;
               isPerson(resp.data);
               nockDone1();
