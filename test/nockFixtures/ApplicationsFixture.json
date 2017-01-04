@@ -1,0 +1,63 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "get",
+        "path": "/platform/applications/",
+        "body": "",
+        "status": 200,
+        "response": {
+            "status": 200,
+            "object": "/meta/response",
+            "data": {
+                "url": "https://api.zenefits.com/platform/applications",
+                "next_url": null,
+                "object": "/meta/list",
+                "data": [
+                    {
+                        "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                        "fields": {},
+                        "object": "/platform/applications",
+                        "id": "90.com.civic"
+                    }
+                ]
+            },
+            "error": null
+        },
+        "rawHeaders": [
+            "Date",
+            "Tue, 03 Jan 2017 22:06:01 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "Zenefits-Version",
+            "2015-12-15",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Tue, 03 Jan 2017 22:05:59 GMT",
+            "Server",
+            ""
+        ]
+    }
+]

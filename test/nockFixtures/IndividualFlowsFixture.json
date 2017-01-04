@@ -1,0 +1,89 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "get",
+        "path": "/platform/person_subscriptions/37762077/flows/",
+        "body": "",
+        "status": 200,
+        "response": {
+            "status": 200,
+            "object": "/meta/response",
+            "data": {
+                "url": "https://api.zenefits.com/platform/person_subscriptions/37762077/flows",
+                "next_url": null,
+                "object": "/meta/list",
+                "data": [
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762077",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122698",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709056",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122698"
+                    }
+                ]
+            },
+            "error": null
+        },
+        "rawHeaders": [
+            "Date",
+            "Wed, 04 Jan 2017 15:48:11 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "Zenefits-Version",
+            "2015-12-15",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Wed, 04 Jan 2017 15:48:09 GMT",
+            "Server",
+            ""
+        ]
+    }
+]

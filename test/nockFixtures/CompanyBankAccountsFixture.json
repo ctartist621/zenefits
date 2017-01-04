@@ -1,0 +1,69 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "get",
+        "path": "/core/company_banks/",
+        "body": "",
+        "status": 200,
+        "response": {
+          "data": {
+            "data": [
+              {
+                "account_number": "1234567890",
+                "account_type": "checking",
+                "bank_name": "Fake Bank",
+                "company": {
+                  "object": "/meta/ref/list",
+                  "ref_object": "/core/companies",
+                  "url": "https://api.zenefits.com/core/companies/1/"
+                },
+                "id": "54321",
+                "routing_number": "021000029"
+              }
+            ],
+            "next_url": null,
+            "object": "/meta/list",
+            "url": "https://api.zenefits.com/core/banks"
+          },
+          "error": "null",
+          "object": "/meta/response",
+          "status": 200
+        },
+        "rawHeaders": [
+            "Date",
+            "Thu, 15 Dec 2016 00:30:05 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "Zenefits-Version",
+            "2015-12-15",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Thu, 15 Dec 2016 00:30:04 GMT",
+            "Server",
+            ""
+        ]
+    }
+]

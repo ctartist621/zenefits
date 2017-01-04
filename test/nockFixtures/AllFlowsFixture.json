@@ -1,0 +1,441 @@
+[
+    {
+        "scope": "https://api.zenefits.com:443",
+        "method": "get",
+        "path": "/platform/flows/",
+        "body": "",
+        "status": 200,
+        "response": {
+            "status": 200,
+            "object": "/meta/response",
+            "data": {
+                "url": "https://api.zenefits.com/platform/flows",
+                "next_url": null,
+                "object": "/meta/list",
+                "data": [
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762077",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122698",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709056",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122698"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762078",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122699",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709057",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122699"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762079",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122700",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709058",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122700"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762080",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122701",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709059",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122701"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762081",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122702",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709062",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122702"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762082",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122703",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709063",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122703"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762083",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122704",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709064",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122704"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762084",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122705",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709052",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122705"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762085",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122706",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709053",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122706"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762086",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122707",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709054",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122707"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/37762087",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/122708",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1709055",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "122708"
+                    },
+                    {
+                        "person_subscription": {
+                            "url": "https://api.zenefits.com/platform/person_subscriptions/40110986",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/person_subscriptions"
+                        },
+                        "application": {
+                            "url": "https://api.zenefits.com/platform/applications/90.com.civic",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/applications"
+                        },
+                        "url": "https://api.zenefits.com/platform/flows/163651",
+                        "fields": {},
+                        "company": {
+                            "url": "https://api.zenefits.com/core/companies/123730",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/companies"
+                        },
+                        "object": "/platform/flows",
+                        "person": {
+                            "url": "https://api.zenefits.com/core/people/1754322",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/core/people"
+                        },
+                        "company_install": {
+                            "url": "https://api.zenefits.com/platform/company_installs/6053217",
+                            "object": "/meta/ref/detail",
+                            "ref_object": "/platform/company_installs"
+                        },
+                        "type": "employee_profile",
+                        "id": "163651"
+                    }
+                ]
+            },
+            "error": null
+        },
+        "rawHeaders": [
+            "Date",
+            "Wed, 04 Jan 2017 15:42:44 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Encoding",
+            "Vary",
+            "Accept-Language, Authorization, Cookie",
+            "Content-Language",
+            "en-us",
+            "Zenefits-Version",
+            "2015-12-15",
+            "X-Frame-Options",
+            "SAMEORIGIN",
+            "Cache-Control",
+            "no-cache",
+            "X-XSS-Protection",
+            "1; mode=block",
+            "X-Permitted-Cross-Domain-Policies",
+            "master-only",
+            "X-Content-Type-Options",
+            "nosniff",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+            "Expires",
+            "Wed, 04 Jan 2017 15:42:43 GMT",
+            "Server",
+            ""
+        ]
+    }
+]
