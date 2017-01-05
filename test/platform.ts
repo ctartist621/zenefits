@@ -100,7 +100,7 @@ describe("Platform API", function() {
   before(hookBefore);
   after(hookAfter);
 
-  describe("Error Recovery", function() {
+  describe("#Error Recovery", function() {
     it.skip("should recover from a bad access token", function(done: any) {
       client.access_token = "foo";
       client.installations(function(err: any, resp: any) {
@@ -115,6 +115,36 @@ describe("Platform API", function() {
       });
     });
   });
+
+  describe("#Pagination", function() {
+    it("should return next_url and 1 page of data if autoPagination is off", function(done: any) {
+      client.autoPagination = false;
+      nockBack("PeopleFixture.json", function(nockDone: any) {
+        client.people(function(err: any, resp: any) {
+          expect(err).not.exist;
+          expect(resp.data).to.be.instanceof(Array);
+          expect(resp.data).to.have.lengthOf(20);
+          expect(resp.next_url).to.be.a('string');
+          nockDone();
+          done();
+        });
+      });
+    });
+
+    it("should auto paginate for the full list if configured to", function(done: any) {
+      client.autoPagination = true;
+      nockBack("PeopleFixturePagination.json", function(nockDone: any) {
+        client.people(function(err: any, resp: any) {
+          expect(err).not.exist;
+          expect(resp.data).to.have.length.above(20);
+          expect(resp.data).to.be.instanceof(Array);
+
+          nockDone();
+          done();
+        });
+      });
+    });
+  })
 
   describe("#Get Applications", function() {
     it("should get information about the applications", function(done: any) {
@@ -151,11 +181,11 @@ describe("Platform API", function() {
   });
 
   describe.skip("#Set Application Custom Fields", function(){
-    it("should set Application Custom Fields", function(done: any) {
+    it("should set Installation Custom Fields", function(done: any) {
       async.auto({
         setField: function(autoCallback: any) {
-          nockBack("SetApplicationCustomFieldsFixture.json", function(nockDone: any) {
-            client.setApplicationCustomFields({ foo: "bar" }, function(err: any, resp: any) {
+          nockBack("SetInstallationCustomFieldsFixture.json", function(nockDone: any) {
+            client.setInstallationCustomFields({ foo: "bar" }, function(err: any, resp: any) {
               console.log(err)
               expect(err).to.not.exist;
               expect(resp.data).to.be.empty;
