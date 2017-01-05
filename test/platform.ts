@@ -124,7 +124,7 @@ describe("Platform API", function() {
           expect(err).not.exist;
           expect(resp.data).to.be.instanceof(Array);
           expect(resp.data).to.have.lengthOf(20);
-          expect(resp.next_url).to.be.a('string');
+          expect(resp.next_url).to.be.a("string");
           nockDone();
           done();
         });
