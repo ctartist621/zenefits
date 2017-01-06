@@ -1,73 +1,73 @@
 [
-    {
-        "scope": "https://api.zenefits.com:443",
-        "method": "get",
-        "path": "/core/me/",
-        "body": "",
-        "status": 200,
-        "response": {
-            "status": 200,
-            "object": "/meta/response",
-            "data": {
-                "scopes": [
-                    "companies",
-                    "people",
-                    "people.social_security_number",
-                    "people.work_email",
-                    "platform"
-                ],
-                "object": "/core/me",
-                "url": "https://api.zenefits.com/core/me",
-                "company": {
-                    "url": "https://api.zenefits.com/core/companies/123730",
-                    "object": "/meta/ref/detail",
-                    "ref_object": "/core/companies"
-                },
-                "expires": "2017-01-15T00:14:35Z",
-                "person": {
-                    "url": "https://api.zenefits.com/core/people/1709052",
-                    "object": "/meta/ref/detail",
-                    "ref_object": "/core/people"
-                },
-                "uninstalled": false
-            },
-            "error": null
+  {
+    "scope": "https://api.zenefits.com:443",
+    "method": "get",
+    "path": "/core/me/",
+    "body": "",
+    "status": 200,
+    "response": {
+      "status": 200,
+      "object": "/meta/response",
+      "data": {
+        "scopes": [
+          "companies",
+          "people",
+          "people.social_security_number",
+          "people.work_email",
+          "platform"
+        ],
+        "object": "/core/me",
+        "url": "https://api.zenefits.com/core/me",
+        "company": {
+          "url": "https://api.zenefits.com/core/companies/123730",
+          "object": "/meta/ref/detail",
+          "ref_object": "/core/companies"
         },
-        "rawHeaders": [
-            "Date",
-            "Fri, 16 Dec 2016 00:20:27 GMT",
-            "Content-Type",
-            "application/json; charset=utf-8",
-            "Transfer-Encoding",
-            "chunked",
-            "Connection",
-            "close",
-            "Vary",
-            "Accept-Encoding",
-            "Vary",
-            "Accept-Encoding",
-            "Vary",
-            "Accept-Language, Authorization, Cookie",
-            "Content-Language",
-            "en-us",
-            "Zenefits-Version",
-            "2015-12-15",
-            "X-Frame-Options",
-            "SAMEORIGIN",
-            "Cache-Control",
-            "no-cache",
-            "X-XSS-Protection",
-            "1; mode=block",
-            "X-Permitted-Cross-Domain-Policies",
-            "master-only",
-            "X-Content-Type-Options",
-            "nosniff",
-            "Strict-Transport-Security",
-            "max-age=31536000; includeSubDomains",
-            "Expires",
-            "Fri, 16 Dec 2016 00:20:26 GMT",
-            "Server",
-            ""
-        ]
-    }
+        "expires": "2017-01-15T00:14:35Z",
+        "person": {
+          "url": "https://api.zenefits.com/core/people/1709052",
+          "object": "/meta/ref/detail",
+          "ref_object": "/core/people"
+        },
+        "uninstalled": false
+      },
+      "error": null
+    },
+    "rawHeaders": [
+      "Date",
+      "Fri, 16 Dec 2016 00:20:27 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "Vary",
+      "Accept-Encoding",
+      "Vary",
+      "Accept-Language, Authorization, Cookie",
+      "Content-Language",
+      "en-us",
+      "Zenefits-Version",
+      "2015-12-15",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "Cache-Control",
+      "no-cache",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Permitted-Cross-Domain-Policies",
+      "master-only",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains",
+      "Expires",
+      "Fri, 16 Dec 2016 00:20:26 GMT",
+      "Server",
+      ""
+    ]
+  }
 ]

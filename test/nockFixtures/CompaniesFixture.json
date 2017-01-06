@@ -1,69 +1,69 @@
 [
-    {
-        "scope": "https://api.zenefits.com:443",
-        "method": "get",
-        "path": "/core/companies/",
-        "body": "",
-        "status": 200,
-        "response": {
-            "status": 200,
-            "object": "/meta/response",
-            "data": {
-                "url": "https://api.zenefits.com/core/companies",
-                "next_url": null,
-                "object": "/meta/list",
-                "data": [
-                    {
-                        "name": "Civic_Test",
-                        "people": {
-                            "url": "https://api.zenefits.com/core/companies/123730/people",
-                            "object": "/meta/ref/list",
-                            "ref_object": "/core/people"
-                        },
-                        "url": "https://api.zenefits.com/core/companies/123730",
-                        "object": "/core/companies",
-                        "logo_url": null,
-                        "id": "123730"
-                    }
-                ]
+  {
+    "scope": "https://api.zenefits.com:443",
+    "method": "get",
+    "path": "/core/companies/",
+    "body": "",
+    "status": 200,
+    "response": {
+      "status": 200,
+      "object": "/meta/response",
+      "data": {
+        "url": "https://api.zenefits.com/core/companies",
+        "next_url": null,
+        "object": "/meta/list",
+        "data": [
+          {
+            "name": "Civic_Test",
+            "people": {
+              "url": "https://api.zenefits.com/core/companies/123730/people",
+              "object": "/meta/ref/list",
+              "ref_object": "/core/people"
             },
-            "error": null
-        },
-        "rawHeaders": [
-            "Date",
-            "Thu, 15 Dec 2016 00:15:45 GMT",
-            "Content-Type",
-            "application/json; charset=utf-8",
-            "Transfer-Encoding",
-            "chunked",
-            "Connection",
-            "close",
-            "Vary",
-            "Accept-Encoding",
-            "Vary",
-            "Accept-Encoding",
-            "Vary",
-            "Accept-Language, Authorization, Cookie",
-            "Content-Language",
-            "en-us",
-            "Zenefits-Version",
-            "2015-12-15",
-            "X-Frame-Options",
-            "SAMEORIGIN",
-            "Cache-Control",
-            "no-cache",
-            "X-XSS-Protection",
-            "1; mode=block",
-            "X-Permitted-Cross-Domain-Policies",
-            "master-only",
-            "X-Content-Type-Options",
-            "nosniff",
-            "Strict-Transport-Security",
-            "max-age=31536000; includeSubDomains",
-            "Expires",
-            "Thu, 15 Dec 2016 00:15:44 GMT",
-            "Server",
-            ""
+            "url": "https://api.zenefits.com/core/companies/123730",
+            "object": "/core/companies",
+            "logo_url": null,
+            "id": "123730"
+          }
         ]
-    }
+      },
+      "error": null
+    },
+    "rawHeaders": [
+      "Date",
+      "Thu, 15 Dec 2016 00:15:45 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "Vary",
+      "Accept-Encoding",
+      "Vary",
+      "Accept-Language, Authorization, Cookie",
+      "Content-Language",
+      "en-us",
+      "Zenefits-Version",
+      "2015-12-15",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "Cache-Control",
+      "no-cache",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Permitted-Cross-Domain-Policies",
+      "master-only",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains",
+      "Expires",
+      "Thu, 15 Dec 2016 00:15:44 GMT",
+      "Server",
+      ""
+    ]
+  }
 ]

@@ -144,6 +144,31 @@ describe("Platform API", function() {
         });
       });
     });
+
+    it("should accept a second callback to run for each page.", function(done: any) {
+      client.autoPagination = true;
+      let totalRuns = 0;
+      const runDone = () => {
+        expect(totalRuns).to.equal(2);
+        done()
+      }
+
+      nockBack("PeopleFixturePagination.json", function(nockDone: any) {
+        client.people(function(err: any, resp: any) {
+          expect(err).not.exist;
+          expect(resp.data).to.have.length.above(20);
+          expect(resp.data).to.be.instanceof(Array);
+
+          nockDone();
+          runDone();
+        }, function(err: any, resp: any) {
+          totalRuns++;
+          expect(err).not.exist;
+          expect(resp.data).to.have.length.below(21);
+          expect(resp.data).to.be.instanceof(Array);
+        });
+      });
+    });
   })
 
   describe("#Get Applications", function() {
