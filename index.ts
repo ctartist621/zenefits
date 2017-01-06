@@ -30,7 +30,7 @@ export default class Zenefits {
     this.client_id = opts.client_id;
     this.client_secret = opts.client_secret;
     this.credentialsRefreshed = false;
-    this.autoPagination = false;
+    this.autoPagination = opts.autoPagination ? opts.autoPagination : false;
     this.platformBaseUrl = "https://api.zenefits.com/platform";
     this.coreBaseUrl = "https://api.zenefits.com/core";
   }
