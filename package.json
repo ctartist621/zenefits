@@ -1,6 +1,6 @@
 {
   "name": "zenefits",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "An npm module to interact with the Zenefits API",
   "main": "index.js",
   "scripts": {
