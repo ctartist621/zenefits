@@ -29,7 +29,7 @@
     "@types/mocha": "^2.2.33",
     "@types/needle": "^0.7.29",
     "@types/nock": "^8.2.0",
-    "@types/node": "^6.0.56",
+    "@types/node": "^6.0.58",
     "chai": "^3.5.0",
     "codacy-coverage": "^2.0.0",
     "istanbul": "^0.4.5",
