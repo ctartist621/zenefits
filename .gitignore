@@ -55,3 +55,5 @@ jspm_packages
 /test/.DS_Store
 *.js
 .tags_sorted_by_file
+zenefits.sublime-workspace
+zenefits.sublime-project

@@ -190,6 +190,7 @@ describe("Core API", function() {
         client.companies((err: any, companies: any) => {
           nockBack("CompanyFixture.json", function(nockDone2: any) {
             client.company((<ZenefitsCore.Company>_.head(companies.data)).id, (err: any, resp: any) => {
+              console.log(resp)
               expect(err).not.exist;
               isCompany(resp.data);
               nockDone1();
