@@ -23,6 +23,7 @@ export default class Zenefits {
   set: any;
   credentialsRefreshed: boolean;
   autoPagination: boolean;
+  runCollector: boolean
 
   constructor(opts: any) {
     this.access_token = opts.access_token;
@@ -30,6 +31,7 @@ export default class Zenefits {
     this.client_id = opts.client_id;
     this.client_secret = opts.client_secret;
     this.credentialsRefreshed = false;
+    this.runCollector = opts.runCollector ? opts.runCollector : true;
     this.autoPagination = opts.autoPagination ? opts.autoPagination : false;
     this.platformBaseUrl = "https://api.zenefits.com/platform";
     this.coreBaseUrl = "https://api.zenefits.com/core";
@@ -74,13 +76,14 @@ export default class Zenefits {
     }
 
     const handleData = (body: any, cb: any) => {
+      let data = this.runCollector ? collector : (body.data.data ? body.data.data : body.data);
       let ret = {
         credentials: {
           access_token: this.access_token,
           refresh_token: this.refresh_token,
           credentialsRefreshed: this.credentialsRefreshed
         },
-        data: singleton ? _.head(collector) : collector,
+        data: singleton ? _.head(data) : data,
         next_url: body.data.next_url
       };
       cb(undefined, ret)
@@ -106,7 +109,9 @@ export default class Zenefits {
         } else if (resp && resp.statusCode >= 400) {
           handleError(err, resp, body, cb)
         } else if (body && body.data) {
-          collector = _.concat(collector, body.data.data ? body.data.data : body.data);
+          if (this.runCollector) {
+            collector = _.concat(collector, body.data.data ? body.data.data : body.data);
+          }
           if (pageCB) {
             handlePage(body, pageCB)
           }
