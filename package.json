@@ -1,6 +1,6 @@
 {
   "name": "zenefits",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "An npm module to interact with the Zenefits API",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,6 @@
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "^9.0.2",
-    "nodemon": "^1.11.0",
     "publish": "^0.6.0",
     "typescript": "^2.1.4"
   },
