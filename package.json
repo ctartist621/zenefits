@@ -35,7 +35,7 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
-    "nock": "^9.0.2",
+    "nock": "^9.0.14",
     "publish": "^0.6.0",
     "typescript": "^2.1.4"
   },
