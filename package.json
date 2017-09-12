@@ -24,13 +24,13 @@
   "homepage": "https://github.com/ctartist621/zenefits#readme",
   "devDependencies": {
     "@types/async": "^2.0.36",
-    "@types/chai": "^3.4.34",
+    "@types/chai": "^4.0.1",
     "@types/lodash": "^4.14.43",
     "@types/mocha": "^2.2.33",
     "@types/needle": "^0.7.29",
     "@types/nock": "^8.2.0",
-    "@types/node": "^6.0.58",
     "chai": "^4.0.2",
+    "@types/node": "^8.0.0",
     "codacy-coverage": "^2.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
@@ -42,6 +42,6 @@
   "dependencies": {
     "async": "^2.1.4",
     "lodash": "^4.17.2",
-    "needle": "^1.4.2"
+    "needle": "^2.0.0"
   }
 }
