@@ -42,6 +42,6 @@
   "dependencies": {
     "async": "^2.1.4",
     "lodash": "^4.17.2",
-    "needle": "^2.0.0"
+    "needle": "^2.3.0"
   }
 }
