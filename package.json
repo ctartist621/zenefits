@@ -28,7 +28,7 @@
     "@types/lodash": "^4.14.43",
     "@types/mocha": "^2.2.33",
     "@types/needle": "^2.0.1",
-    "@types/nock": "^8.2.0",
+    "@types/nock": "^10.0.0",
     "chai": "^4.0.2",
     "@types/node": "^8.0.0",
     "codacy-coverage": "^2.0.0",
