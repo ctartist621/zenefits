@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "async": "^2.1.4",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.12",
     "needle": "^2.0.0"
   }
 }
