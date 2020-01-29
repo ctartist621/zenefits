@@ -26,7 +26,7 @@
     "@types/async": "^2.0.36",
     "@types/chai": "^4.0.1",
     "@types/lodash": "^4.14.43",
-    "@types/mocha": "^2.2.33",
+    "@types/mocha": "^7.0.0",
     "@types/needle": "^2.0.1",
     "@types/nock": "^8.2.0",
     "chai": "^4.0.2",
